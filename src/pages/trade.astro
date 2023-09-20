@@ -1,0 +1,40 @@
+---
+
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import Layout from "@layouts/Layout.astro";
+import Icon from "astro-icon";
+
+// some js imports here
+---
+
+<Layout title="Opti-Growth | Trade markets">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Trading products</Fragment>
+      <Fragment slot="desc">
+        Choose from 6 asset classes and get access to 500+ trading instruments
+      </Fragment>
+    </Sectionhead>
+    <div class="flex gap-10 items-center justify-center w-full mt-5">
+      <div class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
+        <Icon name="bi:currency-euro" class="w-5 h-5 text-black" />
+      </div>
+      <div class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
+        <Icon name="bi:currency-bitcoin" class="w-5 h-5 text-black" />
+      </div>
+      <div class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
+        <Icon name="bi:bar-chart-fill" class="w-5 h-5 text-black" />
+      </div>
+      <div class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
+        <Icon name="bi:file-image-fill" class="w-5 h-5 text-black" />
+      </div>
+      <div class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
+        <Icon name="bi:droplet" class="w-5 h-5 text-black" />
+      </div>
+      <div class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
+        <Icon name="bi:box-seam" class="w-5 h-5 text-black" />
+      </div>
+    </div>
+  </Container>
+</Layout>

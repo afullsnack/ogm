@@ -15,21 +15,25 @@ const menuitems = [
       { title: "404 Page", path: "/404" },
     ],
   },
-  {
-    title: "Pricing",
-    path: "/pricing",
-  },
+  // {
+  //   title: "Pricing",
+  //   path: "/pricing",
+  // },
   {
     title: "About",
     path: "/about",
   },
   {
-    title: "Blog",
-    path: "/blog",
+    title: "Trade Markets",
+    path: "/trade",
   },
   {
-    title: "Contact",
+    title: "Support",
     path: "/contact",
+  },
+  {
+    title: "Terms",
+    path: "/terms",
   },
 ];
 ---
@@ -43,23 +47,25 @@ const menuitems = [
             class="text-slate-500">ship</span
           >
         </a>
-        <div class="block lg:hidden">
+        <div class="block lg:hidden" id="menu-btn">
           <MenuIcon class="w-4 h-4 text-gray-800" />
         </div>
       </div>
-      <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
+      <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0 menu-toggle">
         <ul class="flex flex-col lg:flex-row lg:gap-3">
           {
             menuitems.map((item, index) => (
-              <>
-                {item.children && (
-                  <Dropdown
-                    title={item.title}
-                    children={item.children}
-                    lastItem={index === menuitems.length - 1}
-                  />
-                )}
-
+              // <>
+                // {item.children && (
+                //   <Dropdown
+                //     title={item.title}
+                //     children={item.children}
+                //     lastItem={index === menuitems.length - 1}
+                //   />
+                // )}
+                
+                // </>
+                <>
                 {!item.children && (
                   <li>
                     <a
@@ -69,7 +75,7 @@ const menuitems = [
                     </a>
                   </li>
                 )}
-              </>
+                </>
             ))
           }
         </ul>
@@ -87,3 +93,14 @@ const menuitems = [
     </div>
   </header>
 </Container>
+
+
+<script>
+  const menuButtton = document.getElementById("menu-btn");
+
+  menuButtton?.addEventListener('click', () => {
+    [...document.querySelectorAll('.menu-toggle')].forEach(element => {
+      element.classList.toggle('hidden');
+    });
+  })
+</script>
