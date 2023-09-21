@@ -1,48 +1,113 @@
 ---
 // @ts-ignore
+import { Picture } from "@astrojs/image/components";
+import Link from "@components/ui/link.astro";
+import img1 from "assets/in-liquid-object-1.svg";
+import img2 from "assets/in-liquid-object-2.svg";
+import img3 from "assets/in-liquid-object-3.svg";
+
+import icon1 from "assets/in-liquid-icon-1.svg";
+import icon2 from "assets/in-liquid-icon-2.svg";
+import icon3 from "assets/in-liquid-icon-3.svg";
+import icon4 from "assets/in-liquid-icon-4.svg";
 import { Icon } from "astro-icon";
 
 const features = [
   {
-    title: "Bring Your Own Framework",
+    title: "Expert service",
     description:
-      "Build your site using React, Svelte, Vue, Preact, web components, or just plain ol' HTML + JavaScript.",
-    icon: "bx:bxs-briefcase",
+      "Our highly skilled and dedicated support team are here to help whenever you need it.",
+    icon: icon1,
   },
   {
-    title: "100% Static HTML, No JS",
+    title: "Fully regulated",
     description:
-      "Astro renders your entire page to static HTML, removing all JavaScript from your final build by default.",
-    icon: "bx:bxs-window-alt",
+      "OptiGrowth Markets holds a global licence to trade currencies and procure payments.",
+    icon: icon2,
   },
   {
-    title: "On-Demand Components",
+    title: "Financial advise",
     description:
-      "Need some JS? Astro can automatically hydrate interactive components when they become visible on the page.  ",
-    icon: "bx:bxs-data",
+      "Our finance consultants and managers are always on standby to support your investing needs.",
+    icon: icon3,
   },
   {
-    title: "Broad Integration",
+    title: "Integrated support",
     description:
-      "Astro supports TypeScript, Scoped CSS, CSS Modules, Sass, Tailwind, Markdown, MDX, and any other npm packages.",
-    icon: "bx:bxs-bot",
+      "24/7 Support, always available to help you. Just make use of the LiveChat if you need support.",
+    icon: icon4,
+  },
+];
+
+const moreFeatures = [
+  {
+    title: "Various Assets",
+    description:
+      "Trade your way with Braceyield’ web app for mobile and desktop. Trading hourly, daily or weekly provides unique opportunities.",
+    img: img1,
   },
   {
-    title: "SEO Enabled",
+    title: "Market Analysis",
     description:
-      "Automatic sitemaps, RSS feeds, pagination and collections take the pain out of SEO and syndication. It just works!",
-    icon: "bx:bxs-file-find",
+      "More than 100 most widely-used technical indicators and widgets. Control your trades with features like Stop Loss/Take Profit.",
+    img: img2,
   },
   {
-    title: "Community",
+    title: "Live Trading",
     description:
-      "Astro is an open source project powered by hundreds of contributors making thousands of individual contributions.",
-    icon: "bx:bxs-user",
+      "Select from a list of CFDs on widely traded assets representing a particular market sector or national economy.",
+    img: img3,
   },
 ];
 ---
 
-<div class="mt-16 md:mt-0">
+<div class="flex items-center justify-between">
+  <h2 class="text-3xl lg:text-2xl font-bold lg:tracking-tight">
+    Save time. Get <strong class="text-blue-600">higher return</strong>.<br /> Multiply
+    wealth.
+  </h2>
+  <Link
+    size="md"
+    style="outline"
+    rel="noopener"
+    href="/blog"
+    class="flex gap-1 items-center justify-center"
+    target="_blank">
+    <!-- <Icon class="text-black w-4 h-4" name="bx:bxl-github" /> -->
+    FIND OUT MORE
+    <Icon name="bi:arrow-right-short" class="w-4 h-4" />
+  </Link>
+</div>
+
+<div
+  class="grid md:grid-cols-3 items-start gap-4 mx-auto mt-6 justify-start py-6 bg-black">
+  {
+    moreFeatures.map((item) => (
+      <div class="grid gap-2 max-w-xs bg-slate-600 max-h rounded-sm text-white">
+        <div class="w-full">
+          <Picture
+            src={item.img}
+            alt={item.title}
+            widths={[180, 180, 180]}
+            fit="cover"
+            aspectRatio="4:4"
+            sizes="(max-width: 180px) 280px, 270px"
+            loading="eager"
+            format="avif"
+          />
+        </div>
+        <div class="p-6">
+          <h2 class="text-xl lg:text-xl font-bold lg:tracking-tight mb-4">
+            {item.title}
+          </h2>
+          <p>{item.description}</p>
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<!-- <div class="mt-16 md:mt-0">
   <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">
     Everything you need to start a website
   </h2>
@@ -50,20 +115,70 @@ const features = [
     Astro comes batteries included. It takes the best parts of state-of-the-art
     tools and adds its own innovations.
   </p>
-</div>
+</div> -->
 
-<div class="grid sm:grid-cols-2 md:grid-cols-3 mt-16 gap-16">
+<div class="grid sm:grid-cols-1 md:grid-cols-2 mt-16 gap-16">
   {
     features.map((item) => (
       <div class="flex gap-4 items-start">
-        <div class="mt-1 bg-black rounded-full  p-2 w-8 h-8 shrink-0">
-          <Icon class="text-white" name={item.icon} />
+        <div class="mt-1 bg-black/10 rounded-full flex items-center justify-center  p-1 w-20 h-20 shrink-0">
+          <Picture
+            src={item.icon}
+            alt="Lowest fees"
+            widths={[80, 80]}
+            aspectRatio="4:4"
+            sizes="(max-width: 80px) 80px, 70px"
+            loading="eager"
+            format="avif"
+          />
         </div>
         <div>
           <h3 class="font-semibold text-lg">{item.title}</h3>{" "}
-          <p class="text-slate-500 mt-2 leading-relaxed">{item.description}</p>
+          <p class="text-slate-500 my-2 leading-relaxed">{item.description}</p>
+          <a
+            href="#"
+            class="flex gap-2 items-center text-xs hover:text-blue-500">
+            LEARN MORE <Icon name="bi:arrow-right-short" class="w-4 h-4" />
+          </a>
         </div>
       </div>
     ))
   }
+</div>
+
+<div class="max-w-4xl p-4 border border-gray-300 rounded-md mx-auto my-8">
+  <ol
+    class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
+    <li
+      class="flex md:w-full items-center text-blue-600 dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+      <span
+        class="grid gap-2 items-center justify-center justify-items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+        <span
+          class="mr-2 flex items-center justify-center w-8 h-8 border border-blue-600 rounded-full shrink-0 dark:border-blue-500"
+          >1</span
+        >
+        <span class="hidden sm:inline-flex sm:ml-2">Register Account</span>
+      </span>
+    </li>
+    <li
+      class="flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+      <span
+        class="grid gap-2 items-center justify-center justify-items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+        <span
+          class="mr-2 flex items-center justify-center w-8 h-8 border border-blue-600 rounded-full shrink-0 dark:border-blue-500"
+          >2</span
+        >
+        Fund your Account
+      </span>
+    </li>
+    <li class="flex items-center">
+      <span class="grid gap-2 items-center justify-center justify-items-center">
+        <span
+          class="mr-2 flex items-center justify-center w-8 h-8 border border-blue-600 rounded-full shrink-0 dark:border-blue-500"
+          >3</span
+        >
+        Start your Trade
+      </span>
+    </li>
+  </ol>
 </div>
