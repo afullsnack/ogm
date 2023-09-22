@@ -1,17 +1,151 @@
 ---
+import { Picture } from "@astrojs/image/components";
+import Stat1 from "assets/stat-1.svg";
+import Stat2 from "assets/stat-2.svg";
+import Stat3 from "assets/stat-3.svg";
+import Stat4 from "assets/stat-4.svg";
+import { Icon } from "astro-icon";
 import Link from "./ui/link.astro";
+
+const varieties = [
+  {
+    title: "Stocks",
+    description:
+      "Invest in stocks with 0% commission. Buy in bulk or just a fraction and earn.",
+    img: "MSFT",
+  },
+  {
+    title: "Forex",
+    description:
+      "Go long or short on FX from just 1 pip. Trade commodities with flexible leverage.",
+    img: "USD",
+  },
+  {
+    title: "Crypto",
+    description:
+      "Buy, sell and store Bitcoin and other leading cryptos with ease.",
+    img: "BTC",
+  },
+  {
+    title: "Learn",
+    description:
+      "All the resources you need to learn how to be successful in trading and investing.",
+    img: "INFO",
+  },
+];
+
+const stats = [
+  {
+    stat: "20 years",
+    title: "Experience",
+    img: Stat1,
+  },
+  {
+    stat: "18 years",
+    title: "Required",
+    img: Stat2,
+  },
+  {
+    stat: "100K+",
+    title: "Trades Per Day",
+    img: Stat3,
+  },
+  {
+    stat: "24/7",
+    title: "Customer Support",
+    img: Stat4,
+  },
+];
 ---
 
 <div
-  class="bg-black p-8 md:px-20 md:py-20 mt-20 mx-auto max-w-5xl rounded-lg flex flex-col items-center text-center">
-  <h2 class="text-white text-4xl md:text-6xl tracking-tight">
-    Build faster websites.
+  class="bg-white p-8 md:px-20 md:py-20 mt-5 mx-auto max-w-5xl rounded-lg flex flex-col items-center text-center">
+  <h2 class="text-black text-4xl md:text-3xl tracking-tight font-bold">
+    Trade Crypto Easily.
   </h2>
   <p class="text-slate-400 mt-4 text-lg md:text-xl">
-    Pull content from anywhere and serve it fast with Astro's next-gen island
-    architecture.
+    Join the world's fast-growing crypto platform for positive results!
   </p>
-  <div class="flex mt-5">
-    <Link href="#" style="inverted">Get Started</Link>
+  <div class="flex my-5 gap-4">
+    <Link
+      size="md"
+      style="primary"
+      rel="noopener"
+      href="/blog"
+      class="flex gap-1 items-center justify-center bg-blue-600"
+      target="_blank">
+      <!-- <Icon class="text-black w-4 h-4" name="bx:bxl-github" /> -->
+      START TRADING
+      <Icon name="bi:arrow-right-short" class="w-4 h-4" />
+    </Link>
+    <Link
+      size="md"
+      style="primary"
+      rel="noopener"
+      href="/blog"
+      class="flex gap-1 items-center justify-centers"
+      target="_blank">
+      <!-- <Icon class="text-black w-4 h-4" name="bx:bxl-github" /> -->
+      VIEW SERVICES
+      <Icon name="bi:arrow-right-short" class="w-4 h-4" />
+    </Link>
+  </div>
+
+  <div class="mt-20">
+    <h2 class="text-black text-4xl md:text-3xl tracking-tight font-bold">
+      Market Varieties
+    </h2>
+    <p class="text-slate-400 mt-4 text-lg md:text-xl">
+      Get analysis, signals and actionable trade ideas from our expert analysts.
+    </p>
+    <div class="flex gap-3 items-stretch justify-center mt-5">
+      {
+        varieties.map((item) => (
+          <div class="w-1/4 bg-slate-700 text-white grid gap-6 p-5 text-start rounded-md">
+            <h4 class="font-bold text-sm flex items-center justify-start gap-3">
+              <div class="rounded-full w-8 h-8 flex items-center justify-center bg-red-400">
+                <span class="text-[8px] font-bold">{item.img}</span>
+              </div>
+              {item.title}
+            </h4>
+            <span class="text-sm font-light">{item.description}</span>
+
+            <a
+              href="#"
+              class="flex gap-1 items-center justify-start py-1 px-0 text-blue-600 mx-0 text-xs">
+              START TRADING <Icon name="bi:arrow-right-short" class="w-4 h-4" />
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="mt-20">
+    <h2 class="text-black text-4xl md:text-3xl tracking-tight font-bold">
+      Trade with <b class="text-blue-600">world-leading</b> broker.
+    </h2>
+    <div class="flex gap-3 items-stretch justify-center mt-5">
+      {
+        stats.map((item) => (
+          <div class="w-44 text-white grid gap-6 p-5 items-center justify-center text-center border-b-blue-600/60 border-b">
+            <Picture
+              src={item.img}
+              alt={item.title}
+              widths={[80, 80]}
+              fit="cover"
+              aspectRatio="4:4"
+              sizes="(max-width: 80px) 80px, 70px"
+              loading="eager"
+              format="avif"
+              class="mx-auto"
+            />
+            <h4 class="font-bold text-gray-600/60 text-2xl flex items-center justify-center">
+              {item.stat}
+            </h4>
+            <span class="text-sm font-light text-blue-600">{item.title}</span>
+          </div>
+        ))
+      }
+    </div>
   </div>
 </div>

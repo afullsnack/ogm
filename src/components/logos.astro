@@ -1,16 +1,35 @@
 ---
 // @ts-ignore
-import { Icon } from "astro-icon";
+
+import { Picture } from "@astrojs/image/components";
+import Press1 from "assets/press-1.svg";
+import Press2 from "assets/press-2.svg";
+import Press3 from "assets/press-3.svg";
+import Press4 from "assets/press-4.svg";
+
+const press = [Press1, Press2, Press3, Press4];
 ---
 
 <div class="mt-24">
-  <h2 class="text-center text-slate-500">Works with your technologies</h2>
+  <h2 class="text-center text-slate-500">We are in the press.</h2>
   <div class="flex gap-8 md:gap-20 items-center justify-center mt-10 flex-wrap">
-    <Icon class="h-8 md:h-12" name="simple-icons:react" />
+    {
+      press.map((item) => (
+        <Picture
+          src={item}
+          alt={"Press images"}
+          widths={[280, 280]}
+          fit="cover"
+          sizes="(max-width: 180px) 180px, 170px"
+          loading="eager"
+          format="avif"
+          class="mx-auto h-8 md:h-10"
+        />
+      ))
+    }
+    <!-- <Icon class="h-8 md:h-12" name="simple-icons:react" />
     <Icon class="h-8 md:h-12" name="simple-icons:svelte" />
     <Icon class="h-8 md:h-14" name="simple-icons:tailwindcss" />
-    <Icon class="h-8 md:h-16" name="simple-icons:alpinedotjs" />
-    <Icon class="h-8 md:h-12" name="simple-icons:vercel" />
-    <Icon class="h-8 md:h-12" name="simple-icons:astro" />
+    <Icon class="h-8 md:h-16" name="simple-icons:alpinedotjs" /> -->
   </div>
 </div>

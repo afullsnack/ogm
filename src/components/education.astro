@@ -1,0 +1,73 @@
+---
+import { Picture } from "@astrojs/image/components";
+import Payment1 from "assets/payment-1.svg";
+import Payment2 from "assets/payment-2.svg";
+import Payment3 from "assets/payment-3.svg";
+import Payment4 from "assets/payment-4.svg";
+import Payment5 from "assets/payment-5.svg";
+import Payment6 from "assets/payment-6.svg";
+import Icon from "astro-icon";
+
+const payments = [
+  Payment1, Payment2, Payment3, Payment4, Payment5, Payment6
+]
+---
+
+
+<div class="grid items-center justify-center justify-items-center mt-20">
+  <h2 class="font-bold text-black text-3xl mb-6">Education for all experience levels.</h2>
+  <div class="flex flex-wrap gap-8 items-center justify-evenly mb-10">
+    <div class="flex items-stretch justify-center gap-4 bg-gray-300 border border-gray-400/60 rounded-sm">
+      <div class="h-full w-4 bg-green-700/50 p-8"></div>
+      <div class="grid gap-1 items-center justify-start p-3">
+        <span class="font-bold text-black/60 text-sm">Webinars and events</span>
+        <a class="text-xs font-light">SIGNU UP NOW </a>
+      </div>
+    </div>
+    <div class="flex items-stretch justify-center gap-4 bg-gray-300 border border-gray-400/60 rounded-sm">
+      <div class="h-full w-4 bg-green-700/50 p-8"></div>
+      <div class="grid gap-1 items-center justify-start p-3">
+        <span class="font-bold text-black/60 text-sm">Trading strategy videos</span>
+        <a class="text-xs font-light">SIGNU UP NOW </a>
+      </div>
+    </div>
+    <div class="flex items-stretch justify-center gap-4 bg-gray-300 border border-gray-400/60 rounded-sm">
+      <div class="h-full w-4 bg-green-700/50 p-8"></div>
+      <div class="grid gap-1 items-center justify-start p-3">
+        <span class="font-bold text-black/60 text-sm">Platform video guides</span>
+        <a class="text-xs font-light">SIGNU UP NOW </a>
+      </div>
+    </div>
+
+  </div>
+  <div class="flex items-center justify-between bg-white px-2 rounded-md gap-4">
+    <span class="text-xs">Practice Stocks and CFDs trading in a risk-free environment</span>
+    <a href="#" class="bg-blue-600 capitalize text-white py-2 px-3 rounded-lg flex items-center justify-center text-xs hover:bg-red-500 transition-all duration-75 hover:cursor-pointer">create a demo account <Icon name="bi:arrow-right-short" class="w-4 h-4" /></a>
+  </div>
+
+  <div class="mt-24 grid justify-items-center">
+    <h2 class="text-center text-slate-500 font-bold">We Accept...
+    </h2>
+    <div class="flex gap-8 md:gap-20 items-center justify-center mt-10 flex-wrap">
+      {
+        payments.map((item) => (
+        <Picture
+          src={item}
+          alt={"Press images"}
+          widths={[280, 280]}
+          fit="cover"
+          
+          sizes="(max-width: 180px) 180px, 170px"
+          loading="eager"
+          format="avif"
+          class="mx-auto h-6 md:h-8"
+        />
+        ))
+      }
+    </div>
+
+    <div class="flex items-center justify-between bg-white px-2 rounded-lg gap-4 border border-gray-400/60 py-1 mt-5 max-w-xl">
+      <span class="text-xs">Don't see a payment method that works for you? We have other options.</span>
+      <a href="#" class="bg-blue-600 capitalize text-white py-2 px-3 rounded-lg flex items-center justify-center text-xs hover:bg-red-500 transition-all duration-75 hover:cursor-pointer">More options <Icon name="bi:arrow-right-short" class="w-4 h-4" /></a>
+    </div>
+</div>
