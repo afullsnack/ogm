@@ -43,7 +43,7 @@ const moreFeatures = [
   {
     title: "Various Assets",
     description:
-      "Trade your way with Braceyield’ web app for mobile and desktop. Trading hourly, daily or weekly provides unique opportunities.",
+      "Trade your way with Opti-Growth Markets’ web app for mobile and desktop. Trading hourly, daily or weekly provides unique opportunities.",
     img: img1,
   },
   {
@@ -61,8 +61,8 @@ const moreFeatures = [
 ];
 ---
 
-<div class="flex items-center justify-between">
-  <h2 class="text-3xl lg:text-2xl font-bold lg:tracking-tight">
+<div class="flex items-center justify-between px-10 bg-black pt-12">
+  <h2 class="text-3xl lg:text-2xl font-bold lg:tracking-tight text-white">
     Save time. Get <strong class="text-blue-600">higher return</strong>.<br /> Multiply
     wealth.
   </h2>
@@ -70,8 +70,8 @@ const moreFeatures = [
     size="md"
     style="outline"
     rel="noopener"
-    href="/blog"
-    class="flex gap-1 items-center justify-center"
+    href="/user"
+    class="flex gap-1 items-center justify-center text-sm"
     target="_blank">
     <!-- <Icon class="text-black w-4 h-4" name="bx:bxl-github" /> -->
     FIND OUT MORE
@@ -80,7 +80,7 @@ const moreFeatures = [
 </div>
 
 <div
-  class="grid md:grid-cols-3 items-start gap-4 mx-auto mt-6 justify-start py-6 bg-black">
+  class="grid md:grid-cols-3 items-stretch gap-2 mx-auto justify-items-center justify-start py-6 px-10 bg-black">
   {
     moreFeatures.map((item) => (
       <div class="grid gap-2 max-w-xs bg-slate-600 max-h rounded-sm text-white">
@@ -96,7 +96,7 @@ const moreFeatures = [
             format="avif"
           />
         </div>
-        <div class="p-6">
+        <div class="p-5">
           <h2 class="text-xl lg:text-xl font-bold lg:tracking-tight mb-4">
             {item.title}
           </h2>

@@ -1,40 +1,159 @@
 ---
-
 import Container from "@components/container.astro";
-import Sectionhead from "@components/sectionhead.astro";
+import Link from "@components/ui/link.astro";
 import Layout from "@layouts/Layout.astro";
 import Icon from "astro-icon";
 
-// some js imports here
+import PricingCard from "@components/pricing.astro";
+
+// category sections
+const pricing = [
+  {
+    name: "Learn",
+    sub: "KNOWLEDGE TO GET STARTED",
+    popular: false,
+    features: [
+      "FREE Demo Account",
+      "Step-by step tutorials & articles",
+      "Online webinars & local seminars",
+      "Your own Account Manager",
+    ],
+    button: {
+      text: "OPEN DEMO ACCOUNT",
+      link: "/user",
+    },
+  },
+  {
+    name: "Trade",
+    sub: "TAKE YOUR FIRST PROFIT",
+    popular: true,
+    features: [
+      "Tight spreads",
+      "Superfast trade execution",
+      "Hi-tech forex trading tools",
+      "Ultimate risk protection & security",
+    ],
+    button: {
+      text: "OPEN REAL ACCOUNT",
+      link: "/user",
+    },
+  },
+  {
+    name: "Invest",
+    sub: "CHOOSE THE BEST PORTFOLIO",
+    popular: false,
+    features: [
+      "No need to be an experienced",
+      "Large number of strategies",
+      "Profit whenever Managers earn",
+      "Full control of your Investment",
+    ],
+    button: {
+      text: "INVEST NOW",
+      link: "/user",
+    },
+  },
+];
 ---
 
 <Layout title="Opti-Growth | Trade markets">
   <Container>
-    <Sectionhead>
-      <Fragment slot="title">Trading products</Fragment>
+    <!-- <Sectionhead>
+      <Fragment slot="title"></Fragment>
       <Fragment slot="desc">
-        Choose from 6 asset classes and get access to 500+ trading instruments
+        
       </Fragment>
-    </Sectionhead>
-    <div class="flex gap-10 items-center justify-center w-full mt-5">
-      <div class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
-        <Icon name="bi:currency-euro" class="w-5 h-5 text-black" />
+    </Sectionhead> -->
+    <div class="flex items-center justify-center">
+      <div class="grid items-center justify-center">
+        <h1 class="font-bold text-3xl">Trading products</h1>
+        <span
+          >Choose from 6 asset classes and get access to 500+ trading
+          instruments</span
+        >
       </div>
-      <div class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
-        <Icon name="bi:currency-bitcoin" class="w-5 h-5 text-black" />
-      </div>
-      <div class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
-        <Icon name="bi:bar-chart-fill" class="w-5 h-5 text-black" />
-      </div>
-      <div class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
-        <Icon name="bi:file-image-fill" class="w-5 h-5 text-black" />
-      </div>
-      <div class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
-        <Icon name="bi:droplet" class="w-5 h-5 text-black" />
-      </div>
-      <div class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
-        <Icon name="bi:box-seam" class="w-5 h-5 text-black" />
+
+      <div
+        class="flex gap-10 items-center justify-center w-full mt-5 border-l border-l-gray-400">
+        <div class="grid items-center justify-center justify-items-center">
+          <div
+            class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
+            <Icon name="bi:currency-euro" class="w-5 h-5 text-black" />
+          </div>
+          <span class="font-bold text-gray-600/90">Forex</span>
+        </div>
+        <div class="grid items-center justify-center justify-items-center">
+          <div
+            class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
+            <Icon name="bi:currency-bitcoin" class="w-5 h-5 text-black" />
+          </div>
+          <span class="font-bold text-gray-600/90">Crypto</span>
+        </div>
+        <div class="grid items-center justify-center justify-items-center">
+          <div
+            class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
+            <Icon name="bi:bar-chart-fill" class="w-5 h-5 text-black" />
+          </div>
+          <span class="font-bold text-gray-600/90">Indexes</span>
+        </div>
+        <div class="grid items-center justify-center justify-items-center">
+          <div
+            class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
+            <Icon name="bi:file-image-fill" class="w-5 h-5 text-black" />
+          </div>
+          <span class="font-bold text-gray-600/90">Stocks</span>
+        </div>
+        <div class="grid items-center justify-center justify-items-center">
+          <div
+            class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
+            <Icon name="bi:droplet" class="w-5 h-5 text-black" />
+          </div>
+          <span class="font-bold text-gray-600/90">Energy</span>
+        </div>
+        <div class="grid items-center justify-center justify-items-center">
+          <div
+            class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
+            <Icon name="bi:box-seam" class="w-5 h-5 text-black" />
+          </div>
+          <span class="font-bold text-gray-600/90">Commodities</span>
+        </div>
       </div>
     </div>
+
+    <div class="grid grid-cols-5 gap-4 mt-40 max-w-4xl mx-auto">
+      <div class="grid items-center justify-items-center text-center w-40">
+        <h1 class="font-bold text-gray-600/90">Wide Range of Trading Instruments</h1>
+      </div>
+      <div class="grid items-center justify-items-center text-center w-40">
+        <h1 class="font-bold text-gray-600/90">Unparalleled Trading Conditions</h1>
+      </div>
+      <div class="grid items-center justify-items-center text-center w-40">
+        <h1 class="font-bold text-gray-600/90">Globally Licensed & Regulated</h1>
+      </div>
+      <div class="grid items-center justify-items-center text-center w-40">
+        <h1 class="font-bold text-gray-600/90">Crypto & Forex Education</h1>
+      </div>
+      <div class="grid items-center justify-items-center text-center w-40">
+        <h1 class="font-bold text-gray-600/90">Regular Contests & Promotions</h1>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-screen-lg mt-12">
+      {pricing.map((item) => <PricingCard plan={item} />)}
+    </div>
   </Container>
+  <div class="px-20 mt-20">
+    <div class="w-full flex justify-between items-center p-10 rounded-lg bg-slate-400/30 mx-auto max-w-7xl">
+      <h1 class="text-xl font-bold">Trade and get free commisions Today. It's that easy!</h1>
+      <Link
+      size="md"
+      style="primary"
+      rel="noopener"
+      href="/user"
+      class="flex gap-1 items-center justify-centers text-sm bg-blue-600"
+      target="_blank">
+      <!-- <Icon class="text-black w-4 h-4" name="bx:bxl-github" /> -->
+      OPEN AN ACCOUNT
+    </Link>
+    </div>
+  </div>
 </Layout>
