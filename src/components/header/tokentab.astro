@@ -1,0 +1,17 @@
+---
+// This the tab section of the header
+
+
+interface Props {
+  market: string;
+  peer: string;
+  price: number;
+  selected: boolean;
+}
+const { market, peer, price, selected } = Astro.props
+---
+
+<div class={`bg-slate-700/90 rounded-lg mx-2 border-b-4 ${selected? 'border-b-blue-500' : 'border-b-transparent'} px-4 py-2 grid items-start justify-center gap-2`}>
+  <span class="text-sm text-white font-mono">{market}:{peer}</span>
+  <spanc class="text-xs text-red-600 font-bold">{price}</span>
+</div>

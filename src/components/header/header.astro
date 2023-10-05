@@ -1,0 +1,35 @@
+---
+// Server functions
+import TokenTab from "@components/header/tokentab.astro";
+import Icon from "astro-icon";
+const tabList = [
+  {
+    peer: "LTC/BTC",
+    market: "BINANCE",
+    price: 2.37,
+    selected: true,
+  },
+  {
+    peer: "BNB/BTC",
+    market: "BINANCE",
+    price: 1.53,
+    selected: false,
+  }
+]
+---
+
+
+
+<div class="sticky top-0 left-0 right-0 h-20 bg-slate-900/80 flex">
+  <div class="flex-auto flex items-center justify-start pl-40">
+    {
+      tabList.map((item) => (
+        <TokenTab {...item} />
+      ))
+    }
+    <div class="w-10 h-10 bg-transparent mx-2 hover:cursor-pointer hover:bg-slate-500/60 transition-all duration-75 border border-slate-300/60 rounded-md flex items-center justify-center justify-items-center">
+      <Icon name="bi:plus-lg" class="w-5 h-5 text-white" />
+    </div>
+
+  </div>
+</div>
