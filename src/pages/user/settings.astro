@@ -1,11 +1,57 @@
 ---
 
-import DashboardLayout from "@layouts/DashboardLayou.astro";
-
+import QRCodeComp from "@components/QrCode";
+import Sectionhead from "@components/sectionhead.astro";
+import DashboardLayout from "@layouts/DashboardLayout.astro";
 // Settings page
 ---
 
 
 <DashboardLayout>
-  <div>Settings</div>
+  <Sectionhead align="center">
+    <h1 class="text-3xl text-white font-bold" slot="title">{"Users name"}</h1>
+    <Fragment slot="desc">{"Users email"}</Fragment>
+  </Sectionhead>
+  <div class="w-full grid gap-3 relative items-start justify-center">
+    <div class="w-[400px] grid grid-cols-2 gap-4 text-white">
+      <label class="grid items-start">
+        <span>Your Name</span>
+        <input type="text" class="bg-white px-2 py-1 text-black font-medium" />
+      </label>
+      <label class="grid items-start">
+        <span>Your Email</span>
+        <input type="email" class="bg-white px-2 py-1" />
+      </label>
+      <label class="grid items-start">
+        <span>Language</span>
+        <input type="text" class="bg-white px-2 py-1" />
+      </label>
+      <label class="grid items-start">
+        <span>Currency</span>
+        <input type="text" class="bg-white px-2 py-1" />
+      </label>
+      <label class="grid items-start">
+        <span>Change your password</span>
+        <input type="password" class="bg-white px-2 py-1" />
+      </label>
+      <label class="grid items-start">
+        <span>Repeat your password</span>
+        <input type="password" class="bg-white px-2 py-1" />
+      </label>
+      <label class="grid items-start col-span-2">
+        <span>Referal link</span>
+        <input type="text" class="text-black px-2" value="https://optigrowthmarkets.com/user?ref=123456" class="bg-white px-2 py-1" />
+      </label>
+
+    </div>
+  </div>
+  <Sectionhead align="center">
+    <h1 class="text-3xl text-white font-bold" slot="title">{"Security"}</h1>
+    <Fragment slot="desc">{"Secure your account with Google Authenticator"}</Fragment>
+  </Sectionhead>
+  <div class="w-full grid gap-3 relative items-start justify-center mb-12 mt-5">
+    <div class="w-[400px] grid gap-4 text-white items-center justify-center">
+      <QRCodeComp />
+    </div>
+  </div>
 </DashboardLayout>

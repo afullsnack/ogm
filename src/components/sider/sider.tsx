@@ -5,6 +5,7 @@ import {
   Hash,
   History,
   PieChart,
+  Plus,
   User,
   X,
 } from "lucide-react";
@@ -73,7 +74,7 @@ const Sider: FC = () => {
   }, [watchListExpanded]);
 
   return (
-    <aside class="sticky left-0 top-20 bottom-0 w-[70px] h-calc bg-slate-900/80 grid items-start justify-center justify-items-center">
+    <aside class="sticky left-0 top-20 bottom-0 w-[70px] h-calc bg-slate-900/80 grid items-start justify-center justify-items-center z-50">
       <PanesContext.Provider
         value={{
           historyExpanded,
@@ -121,7 +122,7 @@ const Sider: FC = () => {
           ))}
         </nav>
         <div
-          class={`absolute left-[${waitListPosition}px] h-calc ${
+          class={`fixed left-[${waitListPosition}px] h-calc ${
             watchListExpanded ? "w-[300px]" : "w-0"
           } transition-all bg-slate-800/80 shadow-md`}>
           <button
@@ -184,13 +185,25 @@ const ConverterPane: FC<{ className?: string }> = ({ className }) => {
       asset: "Ethereum",
       price: 16.87,
     },
+    {
+      asset: "Euro",
+      price: 26604.72,
+    },
+    {
+      asset: "Dollar US",
+      price: 28011.23,
+    },
+    {
+      asset: "Litecoin",
+      price: 432.89,
+    },
   ];
 
   return (
     <div
       class={`absolute left-[${converterPosition}px] h-calc ${
         converterExpanded ? "w-[250px]" : "w-0"
-      } transition-all bg-slate-800/70 shadow-md ${className}`}>
+      } transition-all bg-slate-800/70 shadow-md ${className} z-50`}>
       <div class="grid items-start place-content-start justify-items-center justify-stretch w-full h-full overflow-hidden text-white">
         <div class="w-full h-8 bg-slate-900 px-2 mx-auto mb-4 my-0 flex items-center justify-between">
           <span class="text-xs font-mono">CONVERTER</span>
@@ -201,11 +214,24 @@ const ConverterPane: FC<{ className?: string }> = ({ className }) => {
           </button>
         </div>
         {convertList.map((item) => (
-          <div class="p-3 m-1 bg-green-300">
-            <span>{item.asset}</span>
-            <span>{item.price}</span>
+          <div
+            class="p-2 my-1 bg-slate-950 focus-within:bg-green-700 w-full mx-auto flex items-center justify-between"
+            key={item.asset}>
+            <div class="flex gap-1">
+              <div class="w-6 h-6 rounded-full mr-2 bg-slate-600"></div>
+              <span>{item.asset}</span>
+            </div>
+            <input
+              type="number"
+              value={item.price}
+              class="outline-none border-b border-b-gray-300 px-1 text-white bg-transparent py-1 text-end max-w-xs w-20 font-bold flex items-center justify-center justify-items-end h-8"
+            />
           </div>
         ))}
+
+        <div class="w-8 h-8 flex items-center justify-center mt-4 rounded-full bg-orange-600">
+          <Plus class="h-6 w-6 text-white" />
+        </div>
       </div>
     </div>
   );

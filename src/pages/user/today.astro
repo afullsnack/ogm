@@ -1,0 +1,35 @@
+---
+// The news page
+import Sectionhead from "@components/sectionhead.astro";
+import DashboardLayout from "@layouts/DashboardLayout.astro";
+import { $news, fetchNews } from "../../stores/news";
+
+await fetchNews();
+---
+
+<DashboardLayout>
+  <Sectionhead>
+    <h1 slot="title" class="text-lg font-semibold text-white">News</h1>
+    <span slot="desc" class="text-sm font-normal text-white">Recent news on FX and crypto from around the world</span>
+  </Sectionhead>
+  <div class="w-full grid gap-3 relative items-center justify-center mt-10">
+    <div class="w-[400px] grid gap-2 text-white">
+      {
+        $news.get().map((item) => {
+          return (
+            <a class="w-full p-4 grid bg-slate-950" href={item.shareURL} target="_blank">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs">{item.source}</span>
+                <span class="text-right text-xs">{new Date(item.feedDate).toLocaleTimeString()}</span>
+              </div>
+              <span class="text-xs line-clamp-2">{item.description}</span>
+            </a>
+          );
+        })
+      }
+      <!-- <div class="">
+
+      </div> -->
+    </div>
+  </div>
+</DashboardLayout>

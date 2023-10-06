@@ -1,5 +1,9 @@
 ---
-import DashboardLayout from "@layouts/DashboardLayou.astro";
+import DashboardLayout from "@layouts/DashboardLayout.astro";
+import { fetchDashboardData } from "../../stores/dashboard";
+
+
+await fetchDashboardData({skip: 0, limit: 100});
 ---
 
 

@@ -1,6 +1,14 @@
 import { atom } from "nanostores";
 
-export const $dashboardData = atom([]);
+type HeaderData = {
+  peer: string;
+  market: string;
+  price: number;
+  changeIn1h: number;
+};
+
+export const $dashboardData = atom<any[]>([]);
+export const $headerData = atom<HeaderData[]>([]);
 
 export const fetchDashboardData = async ({
   skip = 0,
@@ -18,4 +26,10 @@ export const fetchDashboardData = async ({
   console.table(json);
 
   $dashboardData.set(json);
+};
+
+export const addToHeaderData = (data: HeaderData) => {
+  console.log(data, ":::Data to add to header");
+
+  $headerData.set([...$headerData.get(), data]);
 };

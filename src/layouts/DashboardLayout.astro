@@ -17,12 +17,14 @@ import Icon from "astro-icon";
   <body class="grid w-screen h-screen bg-slate-800">
     <Header />
     <div
-      class="flex items-start justify-items-start justify-start w-screen h-screen"
-      style="height: calc(100vh-80px);">
+      class="flex items-start justify-items-start justify-start w-screen overflow-hidden h-calc"
+      >
       <Sider client:load />
-      <slot />
+      <div class="w-full overflow-y-scroll grid h-calc">
+        <slot />
+      </div>
     </div>
-    <div class="w-full h-6 bg-blue-500 sticky bottom-0 right-0 left-0 flex items-center justify-end px-5">
+    <div class="w-full h-6 bg-blue-500 sticky bottom-0 right-0 left-0 flex items-center justify-end px-5 z-[100]">
       <span class="text-xs text-white h-full px-2 flex items-center justify-center bg-slate-400/60 hover:bg-slate-400/40 hover:cursor-pointer">
         <Icon name="bi:chat" class="w-3 h-3 mr-2" />
         CONTACT US
