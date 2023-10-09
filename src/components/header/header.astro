@@ -1,6 +1,7 @@
 ---
 // Server functions
 import TokenTab from "@components/header/tokentab.astro";
+import Modal from "@components/ui/modal.astro";
 import Icon from "astro-icon";
 const tabList = [
   {
@@ -16,20 +17,45 @@ const tabList = [
     selected: false,
   }
 ]
+
+import { $dashboardData, $tabs, createNewTab, removeTab, selectTab } from "../../stores/dashboard";
+// await refreshTabData();
 ---
 
 
 
-<div class="sticky top-0 left-0 right-0 h-20 bg-slate-900/80 flex">
-  <div class="flex-auto flex items-center justify-start pl-40">
+<div class="sticky top-0 left-0 right-0 h-20 bg-slate-900/80 flex items-center">
+  <div class="flex-auto flex items-center justify-start px-2 max-w-2xl overflow-x-scroll">
     {
-      tabList.map((item) => (
-        <TokenTab {...item} />
+      $tabs.get().map((item) => (
+        <TokenTab client:load {...item} selected={item.selected} selectTab={selectTab} removeTab={removeTab} />
       ))
     }
-    <div class="w-10 h-10 bg-transparent mx-2 hover:cursor-pointer hover:bg-slate-500/60 transition-all duration-75 border border-slate-300/60 rounded-md flex items-center justify-center justify-items-center">
-      <Icon name="bi:plus-lg" class="w-5 h-5 text-white" />
-    </div>
-
+    
+    
   </div>
+  <Modal id="newtabmodal" open="Open modal">
+    
+      <main slot="main" class="w-full grid items-center justify-center pr-12 pl-5">
+        <input type="text" class="bg-slate-800 border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium w-full capitalize" placeholder="BTC/ETH" />
+        <div class="h-full w-1/2 overflow-y-scroll bg-green-200/30 hidden">
+          <ul class="w-full h-auto list-none">
+
+          {
+            $dashboardData.get().map((data) => (
+              <li class="flex justify-between items-center hover:bg-gray-400/40" onclick={`${createNewTab(data["name"].toLowerCase())}`}>
+                <span>{data["symbol"]}</span>
+                <span>{data["name"]}</span>
+                <span>{data["price"].toFixed(2)}</span>
+              </li>
+            ))
+          }
+          </ul>
+        </div>
+      </main>
+      <button slot="close" class="mx-auto text-center absolute right-0 top-1">
+        <Icon name="mdi:window-close" class="h-10 w-10 text-slate-300" />
+      </button>
+    
+  </Modal>
 </div>

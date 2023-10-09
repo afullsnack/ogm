@@ -1,17 +1,25 @@
 ---
 // This the tab section of the header
 
+import Icon from 'astro-icon';
+
 
 interface Props {
-  market: string;
-  peer: string;
+  exchange: string;
+  pair: string;
   price: number;
   selected: boolean;
+  coinId: string;
+  selectTab: ({ coinId }: { coinId: string }) => void
+  removeTab: ({ coinId }: { coinId: string }) => void
 }
-const { market, peer, price, selected } = Astro.props
+const { exchange, pair, price, selected, selectTab, removeTab, coinId } = Astro.props
 ---
 
-<div class={`bg-slate-700/90 rounded-lg mx-2 border-b-4 ${selected? 'border-b-blue-500' : 'border-b-transparent'} px-4 py-2 grid items-start justify-center gap-2`}>
-  <span class="text-sm text-white font-mono">{market}:{peer}</span>
-  <spanc class="text-xs text-red-600 font-bold">{price}</span>
+<div class={`bg-slate-700/90 rounded-lg mx-2 border-b-4 ${selected? 'border-b-blue-500' : 'border-b-transparent'} px-4 py-2 grid items-start justify-center gap-2 hover:cursor-pointer`} onclick={`${selectTab({ coinId })}`}>
+  <span class="text-sm text-white font-mono">{exchange}:{pair}</span>
+  <div class="flex justify-between items-center">
+    <span class="text-xs text-red-600 font-bold">{price.toFixed(2)}</span>
+    <Icon name="mdi:window-close" class="h-4 w-4 text-white" onclick={`${removeTab({ coinId })}`} />
+  </div>
 </div>

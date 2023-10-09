@@ -1,0 +1,35 @@
+---import Icon from "astro-icon";
+
+const {id, open} = Astro.props;
+---
+<style lang="scss">
+dialog {
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  &::backdrop {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background: rgba(10, 9, 9, 0.5);
+  }
+}
+</style>
+
+<div class="w-10 h-10 bg-transparent mx-2 hover:cursor-pointer hover:bg-slate-500/60 transition-all duration-75 border border-slate-300/60 rounded-md flex items-center justify-center justify-items-center" onclick={`window.${id}.showModal()`}>
+  <Icon name="bi:plus-lg" class="w-5 h-5 text-white" />
+</div>
+
+<!-- <button >{open}</button> -->
+
+<dialog id={id}>
+  <slot name="main" />
+  <form method="dialog">
+    <slot name="close" />
+  </form>
+</dialog>
