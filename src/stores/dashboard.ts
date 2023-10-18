@@ -24,8 +24,6 @@ export const fetchDashboardData = async ({
   const result = await fetch(ASSET_LIST_DATA_URL);
   const json = await result.json();
 
-  console.table(json);
-
   $dashboardData.set(json["coins"]);
 };
 
@@ -70,6 +68,16 @@ export const getMarketData = async ({
   const json = await result.json();
 
   const tokenData = await getTokenData({ coin });
+
+  if (!json && !tokenData)
+    return {
+      pair: "Loading...",
+      exchange: "Loading...",
+      price: 0,
+      changeIn1h: 0,
+      coinId: "Loading...",
+      selected: false,
+    };
 
   return {
     pair: json[0]["pair"],

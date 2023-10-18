@@ -1,4 +1,5 @@
-import { FC, ReactNode, useState } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
+import { registerNewUser } from "services/UserService";
 
 type IForm = {
   children: ReactNode;
@@ -11,8 +12,14 @@ const OnboardForms: FC<IForm> = ({ children }) => {
   const [regEmail, setRegEmail] = useState();
   const [regPassword, setRegPassword] = useState();
   const [confirmPass, setConfirmPass] = useState();
+
+  // For Login
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  // TODO: initialize pocketbase and pass in the connect URL
+
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -24,7 +31,7 @@ const OnboardForms: FC<IForm> = ({ children }) => {
             className="flex items-center justify-center justify-items-center p-4 outline-1 text-black border border-gray-300 w-full"
             onChange={(e: any) => setEmail(e.target.value)}
           />
-          <label forHtml="password">
+          <label forhtml="password">
             <input
               id="password"
               type="password"
@@ -52,7 +59,7 @@ const OnboardForms: FC<IForm> = ({ children }) => {
 
       {view === "register" && (
         <>
-          <span className="">
+          <span className="text-black text-xs my-4">
             To make things easier for you, we've simplified the Registration
             page. You can complete your profile after registration anytime.
           </span>
@@ -63,58 +70,71 @@ const OnboardForms: FC<IForm> = ({ children }) => {
             onChange={(e: any) => setName(e.target.value)}
           />
           <input
-            type="email"
+            type="text"
             placeholder="Enter email address"
             className="flex items-center justify-center justify-items-center p-4 outline-1 text-black border border-gray-300 w-full mt-4"
             onChange={(e: any) => setRegEmail(e.target.value)}
           />
-          <label htmlFor="password">
-            <input
-              id="password"
-              type="password"
-              placeholder="Enter password"
-              className="flex items-center justify-center justify-items-center p-4 outline-1 text-black border border-gray-300 w-full mt-4"
-              onChange={(e: any) => setRegPassword(e.target.value)}
-            />
-          </label>
-          <label htmlFor="cpassword">
-            <input
-              id="cpassword"
-              type="password"
-              placeholder="Confirm password"
-              className="flex items-center justify-center justify-items-center p-4 outline-1 text-black border border-gray-300 w-full mt-4"
-              onChange={(e: any) => setConfirmPass(e.target.value)}
-            />
-          </label>
+
+          <input
+            type="password"
+            placeholder="Enter password"
+            className="flex items-center justify-center justify-items-center p-4 outline-1 text-black border border-gray-300 w-full mt-4"
+            onChange={(e: any) => setRegPassword(e.target.value)}
+          />
+
+          <input
+            type="password"
+            placeholder="Confirm password"
+            className="flex items-center justify-center justify-items-center p-4 outline-1 text-black border border-gray-300 w-full mt-4"
+            onChange={(e: any) => setConfirmPass(e.target.value)}
+          />
+
           <div className="w-full flex justify-start mt-2 items-center justify-items-center">
             <input
-              type="check"
-              // checked={true}
-              onChange={(e: any) =>
-                setTerm((_prev: boolean) => !e.target.check)
-              }
+              type="checkbox"
+              // checked={term}
+              // value={term}
+
+              onChange={(e: any) => {
+                console.log(e, ":::Event");
+                setTerm(e.target.checked as boolean);
+              }}
               className="w-4 h-4 text-black bg-white hover:cursor-pointer mr-2 rounded-sm border border-gray-500"
             />
             <span className="text-black">
-              I agree to the <a href="#">Terms</a>
+              I agree to the{" "}
+              <a href="#" className="text-blue">
+                Terms
+              </a>
             </span>
           </div>
+          <button
+            className="py-2 px-4 bg-blue-400 text-white mt-4"
+            onClick={() => {
+              console.log(
+                { name, regEmail, regPassword, confirmPass, term },
+                ":::New User"
+              );
+
+              registerNewUser({
+                name,
+                email: regEmail,
+                password: regPassword,
+                confirmPassword: confirmPass,
+                term,
+              });
+            }}>
+            REGISTER
+          </button>
           <div className="w-full text-black justify-between items-center mt-2 px-1">
-            <span
-              className="text-gray-400 text-sm mr-10 hover:cursor-pointer"
-              onClick={() => setView("login")}>
+            <span className="text-gray-400 text-sm mr-10 hover:cursor-pointer">
               Already a user?
             </span>
             <button
               className="py-2 px-4 bg-blue-400 text-white"
               onClick={() => {
-                console.log(
-                  name,
-                  regEmail,
-                  regPassword,
-                  confirmPass,
-                  ":::Details of registration"
-                );
+                setView("login");
               }}>
               SIGN IN
             </button>

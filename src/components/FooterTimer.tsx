@@ -16,7 +16,7 @@ const FooterTimer = () => {
   }, []);
 
   return (
-    <span class="ml-2 text-sm text-white flex gap-4">
+    <span className="ml-2 text-sm text-white flex gap-4">
       <span>{new Date().toLocaleDateString()}</span>
       {currentTIme}
     </span>

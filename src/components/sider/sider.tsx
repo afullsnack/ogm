@@ -88,7 +88,7 @@ const Sider: FC = () => {
         }}>
         <nav class="h-full flex flex-col">
           {navItems.map((item) => (
-            <>
+            <div key={item.title}>
               {item.link || typeof item.link !== "undefined" ? (
                 <a
                   href={`/user/${item.link}`}
@@ -118,7 +118,7 @@ const Sider: FC = () => {
                   </span>
                 </div>
               )}
-            </>
+            </div>
           ))}
         </nav>
         <div
