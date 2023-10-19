@@ -2,9 +2,13 @@
 // The news page
 import Sectionhead from "@components/sectionhead.astro";
 import DashboardLayout from "@layouts/DashboardLayout.astro";
+import { isLoggedIn } from "services/UserService";
 import { $news, fetchNews } from "../../stores/news";
 
 await fetchNews();
+if(!isLoggedIn()) {
+  Astro.redirect("/user");
+}
 ---
 
 <DashboardLayout>

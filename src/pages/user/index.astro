@@ -1,5 +1,12 @@
 ---
 import OnboardForms from "@components/OnboardForms";
+import { isLoggedIn } from "services/UserService";
+
+if(isLoggedIn()) {
+  Astro.redirect("/user/dashboard");
+} else {
+  Astro.redirect("/user");
+}
 ---
 
 

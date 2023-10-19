@@ -1,5 +1,9 @@
 ---
 import DashboardLayout from "@layouts/DashboardLayout.astro";
+import { isLoggedIn } from "services/UserService";
+if(!isLoggedIn()) {
+  Astro.redirect("/user");
+}
 ---
 
 <DashboardLayout>

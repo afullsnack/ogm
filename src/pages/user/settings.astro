@@ -5,12 +5,20 @@ import Sectionhead from "@components/sectionhead.astro";
 import DashboardLayout from "@layouts/DashboardLayout.astro";
 // Settings page
 import WithdrawalCard from "@components/WithdrawalCard";
+import { isLoggedIn, logout } from "services/UserService";
 import { $withdrawals } from "../../stores/settings";
+import LogoutButton from "@components/ui/LogoutButton";
+import UserSettingsDetails from "@components/ui/UserSettingsDetails";
 
 // addPaypalEmail({ email: "text@mail.com", type: 'paypal' });
 // $withdrawals.set([{ email: "text@mail.com", type: 'paypal' }]);
 console.log($withdrawals.get().length, ":::Length");
+if(!isLoggedIn()) {
+  Astro.redirect("/user");
+}
 ---
+
+
 
 
 <DashboardLayout>
@@ -21,37 +29,7 @@ console.log($withdrawals.get().length, ":::Length");
       <Fragment slot="desc">{"Users email"}</Fragment>
     </Sectionhead>
     <div class="w-full grid gap-3 relative items-start justify-center mt-5">
-      <div class="w-[400px] grid grid-cols-2 gap-4 text-white">
-        <label class="grid items-start">
-          <span class="capitalize lg:text-xs text-sm mb-1">YOUR NAME</span>
-          <input type="text" class="bg-slate-800 border-gray-400/50 rounded-md caret-current border px-2 py-1 text-white outline-none font-medium" placeholder="John Doe" />
-        </label>
-        <label class="grid items-start">
-          <span class="capitalize lg:text-xs text-sm mb-1">YOUR EMAIL</span>
-          <input type="email" class="bg-slate-800 border-gray-400/50 rounded-md caret-current border px-2 py-1 text-white outline-none font-medium" placeholder="john@doe.xyz"/>
-        </label>
-        <label class="grid items-start">
-          <span class="capitalize lg:text-xs text-sm mb-1">LANGUAGE</span>
-          <input type="text" class="bg-slate-800 border-gray-400/50 rounded-md caret-current border px-2 py-1 text-white outline-none font-medium" placeholder="ENGLISH" />
-        </label>
-        <label class="grid items-start">
-          <span class="capitalize lg:text-xs text-sm mb-1">CURRENCY</span>
-          <input type="text" class="bg-slate-800 border-gray-400/50 rounded-md caret-current border px-2 py-1 text-white outline-none font-medium" placeholder="USD" />
-        </label>
-        <label class="grid items-start">
-          <span class="capitalize lg:text-xs text-sm mb-1">CHANGE YOUR PASSWORD</span>
-          <input type="password" class="bg-slate-800 border-gray-400/50 rounded-md caret-current border px-2 py-1 text-white outline-none font-medium" placeholder="password" />
-        </label>
-        <label class="grid items-start">
-          <span class="capitalize lg:text-xs text-sm mb-1">REPEAT YOUR PASSWORD</span>
-          <input type="password" class="bg-slate-800 border-gray-400/50 rounded-md caret-current border px-2 py-1 text-white outline-none font-medium" placeholder="password" />
-        </label>
-        <label class="grid items-start col-span-2">
-          <span class="capitalize lg:text-xs text-sm mb-1">REFERAL LINK</span>
-          <input type="text" class="bg-slate-800 border-gray-400/50 rounded-md caret-current border px-2 py-1 text-white outline-none font-medium" value="https://optigrowthmarkets.com/user?ref=123456" class="bg-white px-2 py-1" />
-        </label>
-  
-      </div>
+      <UserSettingsDetails client:load />
     </div>
     <Sectionhead align="center">
       <h1 class="text-3xl text-white font-bold" slot="title">{"Security"}</h1>
@@ -92,5 +70,16 @@ console.log($withdrawals.get().length, ":::Length");
         ))
       }
     </div>
+    <Sectionhead align="center">
+      <h1 class="text-3xl text-white font-bold" slot="title">{"Logout"}</h1>
+      <Fragment slot="desc">Logout of your account</Fragment>
+    </Sectionhead>
+    <div class="flex items-center justify-center gap-2 mt-2 mb-5">
+      <LogoutButton client:load />
+    </div>
   </div>
 </DashboardLayout>
+
+<script>
+  console.log(window.localStorage.getItem('pocketbase_auth'), ":::Auth model");
+</script>

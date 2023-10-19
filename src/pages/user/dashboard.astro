@@ -1,8 +1,12 @@
 ---
 import DashboardLayout from "@layouts/DashboardLayout.astro";
 import { fetchDashboardData } from "../../stores/dashboard";
+import { isLoggedIn } from "services/UserService";
 
 await fetchDashboardData({ skip: 0, limit: 100 });
+if(!isLoggedIn()) {
+  Astro.redirect("/user");
+}
 ---
 
 <DashboardLayout>

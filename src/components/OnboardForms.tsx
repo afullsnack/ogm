@@ -1,5 +1,5 @@
 import { FC, ReactNode, useEffect, useState } from "react";
-import { registerNewUser } from "services/UserService";
+import { loginWithPass, registerNewUser } from "services/UserService";
 
 type IForm = {
   children: ReactNode;
@@ -17,6 +17,10 @@ const OnboardForms: FC<IForm> = ({ children }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  // Button loading states
+  const [isLoggingLoading, setIsLoggingLoading] = useState(false);
+  const [isRegisterLoading, setIsRegisterLoading] = useState(false);
+
   // TODO: initialize pocketbase and pass in the connect URL
 
   useEffect(() => {}, []);
@@ -31,27 +35,37 @@ const OnboardForms: FC<IForm> = ({ children }) => {
             className="flex items-center justify-center justify-items-center p-4 outline-1 text-black border border-gray-300 w-full"
             onChange={(e: any) => setEmail(e.target.value)}
           />
-          <label forhtml="password">
-            <input
-              id="password"
-              type="password"
-              placeholder="Enter password"
-              className="flex items-center justify-center justify-items-center p-4 outline-1 text-black border border-gray-300 w-full mt-4"
-              onChange={(e: any) => setPassword(e.target.value)}
-            />
-          </label>
-          <div className="w-full text-black justify-between items-center mt-2 px-1">
+
+          <input
+            id="password"
+            type="password"
+            placeholder="Enter password"
+            className="flex items-center justify-center justify-items-center p-4 outline-1 text-black border border-gray-300 w-full mt-4"
+            onChange={(e: any) => setPassword(e.target.value)}
+          />
+
+          <div className="w-full text-black justify-between items-center mt-2 px-1 mb-10">
             <span className="text-gray-400 text-sm mr-10 hover:cursor-pointer">
               Forgot password?
             </span>
-            <button className="py-2 px-4 bg-blue-400 text-white">LOGIN</button>
+            <button
+              className="py-2 px-4 bg-blue-400 text-white"
+              onClick={async () => {
+                // Toggle loading state
+                setIsLoggingLoading(true);
+                // LOg user in
+                await loginWithPass(email, password);
+                setIsLoggingLoading(false);
+              }}>
+              {isLoggingLoading ? "LOADING..." : "LOGIN"}
+            </button>
           </div>
-          <span className="text-center text-black text-xs mx-auto my-1 px-4 mt-5">
+          <span className="text-center text-black text-xs mx-auto px-4">
             Not yet a member?
           </span>
           <button
             onClick={() => setView("register")}
-            className="py-2 px-4 bg-blue-400 text-white mt-10 hover:bg-yellow-600/80">
+            className="py-2 px-4 bg-blue-400 text-white mt-3 hover:bg-yellow-600/80">
             REGISTER HERE
           </button>
         </>
@@ -111,21 +125,32 @@ const OnboardForms: FC<IForm> = ({ children }) => {
           </div>
           <button
             className="py-2 px-4 bg-blue-400 text-white mt-4"
-            onClick={() => {
-              console.log(
-                { name, regEmail, regPassword, confirmPass, term },
-                ":::New User"
-              );
+            onClick={async () => {
+              try {
+                // Toggle loading state
+                setIsRegisterLoading(true);
+                console.log(
+                  { name, regEmail, regPassword, confirmPass, term },
+                  ":::New User"
+                );
 
-              registerNewUser({
-                name,
-                email: regEmail,
-                password: regPassword,
-                confirmPassword: confirmPass,
-                term,
-              });
+                await registerNewUser({
+                  name,
+                  email: regEmail,
+                  password: regPassword,
+                  confirmPassword: confirmPass,
+                  term,
+                });
+                setIsRegisterLoading(false);
+
+                setView("login");
+              } catch (e: any) {
+                setIsRegisterLoading(false);
+                window.alert(e.message ?? e.toString());
+                throw new Error(e.message ?? e.toString());
+              }
             }}>
-            REGISTER
+            {isRegisterLoading ? "LOADING..." : "REGISTER"}
           </button>
           <div className="w-full text-black justify-between items-center mt-2 px-1">
             <span className="text-gray-400 text-sm mr-10 hover:cursor-pointer">

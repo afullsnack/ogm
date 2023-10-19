@@ -3,9 +3,23 @@ import PocketBase from "pocketbase";
 const pb = new PocketBase("https://ogm-admin.fly.dev");
 
 export const loginWithPass = async (email: string, pass: string) => {
-  const user = await pb.collection("users").authWithPassword(email, pass);
-  console.log(user, "::USer collection");
-  window.localStorage.setItem("uid", user.record.id);
+  try {
+    if (!email) {
+      window.alert("No email address provided");
+      throw new Error("No email address provided");
+    } else if (!pass) {
+      window.alert("No password provided");
+      throw new Error("No password provided");
+    }
+    const user = await pb.collection("users").authWithPassword(email, pass);
+    console.log(user, "::USer collection");
+    pb.authStore.exportToCookie({ httpOnly: false }, "pb_auth");
+    window.location.href = "http://localhost:3000/user/dashboard";
+    // return user.record;
+  } catch (e: any) {
+    window.alert(e.toString());
+    throw new Error(e.message ?? e.toString());
+  }
 };
 
 type NewUser = {
@@ -23,8 +37,10 @@ export const registerNewUser = async ({
   term,
 }: NewUser) => {
   if (!term) {
+    window.alert("Terms and condition not yet accepted");
     throw new Error("Terms and condition not yet accepted");
   } else if (password !== confirmPassword) {
+    window.alert("Passwords do not match");
     throw new Error("Passwords do not match");
   }
 
@@ -37,16 +53,16 @@ export const registerNewUser = async ({
 
   console.log(result, ":::New user created");
 
-  window.localStorage.setItem("uid", result?.id);
-  window.localStorage.setItem("uname", result?.name);
-
   return result;
 };
 
 export const logout = () => {
-  window.localStorage.removeItem("uid");
+  // window.localStorage.removeItem("pocketbase_auth");
+  pb.authStore.clear();
+  window.location.href = "http://localhost:3000/user";
 };
 
-export const isLogged = () => {
-  return !!window.localStorage.getItem("uid");
+export const isLoggedIn = () => {
+  // return !!window.localStorage.getItem("pocketbase_auth");
+  return pb.authStore.isValid;
 };
