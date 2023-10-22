@@ -1,11 +1,12 @@
 ---
 // @ts-ignore
-
-import { Picture } from "@astrojs/image/components";
 import Press1 from "assets/press-1.svg";
 import Press2 from "assets/press-2.svg";
 import Press3 from "assets/press-3.svg";
 import Press4 from "assets/press-4.svg";
+
+
+import { Image } from "astro:assets";
 
 const press = [Press1, Press2, Press3, Press4];
 ---
@@ -15,10 +16,9 @@ const press = [Press1, Press2, Press3, Press4];
   <div class="flex gap-8 md:gap-20 items-center justify-center mt-10 flex-wrap">
     {
       press.map((item) => (
-        <Picture
+        <Image
           src={item}
           alt={"Press images"}
-          widths={[280, 280]}
           fit="cover"
           sizes="(max-width: 180px) 180px, 170px"
           loading="eager"

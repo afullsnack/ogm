@@ -1,5 +1,5 @@
 ---
-import { Picture } from "@astrojs/image/components";
+import { Image} from "astro:assets"
 import Stat1 from "assets/stat-1.svg";
 import Stat2 from "assets/stat-2.svg";
 import Stat3 from "assets/stat-3.svg";
@@ -150,12 +150,10 @@ const stats = [
       {
         stats.map((item) => (
           <div class="w-44 text-white grid gap-6 p-5 items-center justify-center text-center border-b-blue-600/60 border-b">
-            <Picture
+            <Image
               src={item.img}
               alt={item.title}
-              widths={[80, 80]}
               fit="cover"
-              aspectRatio="4:4"
               sizes="(max-width: 80px) 80px, 70px"
               loading="eager"
               format="avif"

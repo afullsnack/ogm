@@ -1,6 +1,6 @@
 ---
+import { Image } from "astro:assets";
 // @ts-ignore
-import { Picture } from "@astrojs/image/components";
 import Link from "@components/ui/link.astro";
 import img1 from "assets/in-liquid-object-1.svg";
 import img2 from "assets/in-liquid-object-2.svg";
@@ -85,12 +85,10 @@ const moreFeatures = [
     moreFeatures.map((item) => (
       <div class="grid gap-2 max-w-xs bg-slate-600 max-h rounded-sm text-white">
         <div class="w-full">
-          <Picture
+          <Image
             src={item.img}
             alt={item.title}
-            widths={[180, 180, 180]}
             fit="cover"
-            aspectRatio="4:4"
             sizes="(max-width: 180px) 280px, 270px"
             loading="eager"
             format="avif"
@@ -122,11 +120,9 @@ const moreFeatures = [
     features.map((item) => (
       <div class="flex gap-4 items-start">
         <div class="mt-1 bg-black/10 rounded-full flex items-center justify-center  p-1 w-20 h-20 shrink-0">
-          <Picture
+          <Image
             src={item.icon}
             alt="Lowest fees"
-            widths={[80, 80]}
-            aspectRatio="4:4"
             sizes="(max-width: 80px) 80px, 70px"
             loading="eager"
             format="avif"

@@ -1,5 +1,4 @@
 ---
-import { Picture } from "@astrojs/image/components";
 import Payment1 from "assets/payment-1.svg";
 import Payment2 from "assets/payment-2.svg";
 import Payment3 from "assets/payment-3.svg";
@@ -7,6 +6,7 @@ import Payment4 from "assets/payment-4.svg";
 import Payment5 from "assets/payment-5.svg";
 import Payment6 from "assets/payment-6.svg";
 import Icon from "astro-icon";
+import { Image } from "astro:assets";
 
 const payments = [
   Payment1, Payment2, Payment3, Payment4, Payment5, Payment6
@@ -51,12 +51,11 @@ const payments = [
     <div class="flex gap-8 md:gap-20 items-center justify-center mt-10 flex-wrap">
       {
         payments.map((item) => (
-        <Picture
+        <Image
           src={item}
           alt={"Press images"}
           widths={[280, 280]}
           fit="cover"
-          
           sizes="(max-width: 180px) 180px, 170px"
           loading="eager"
           format="avif"

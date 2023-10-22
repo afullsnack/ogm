@@ -1,15 +1,15 @@
 ---
-import { Picture } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 import Link from "@components/ui/link.astro";
 import featIcon3 from "assets/fast-signal.svg";
 import featIcon2 from "assets/global-access.svg";
-import featIcon1 from "assets/lowest-asset-icon.svg";
+import featIcon1 from "../assets/lowest-asset-icon.svg";
 ---
 <main class="grid bg-fixed bg-no-repeat bg-center bg-cover" style="background-image: url(/in-liquid-slide-bg.png);">
 <main
   class="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-12 md:pb-24 px-10">
   <div class="py-6 md:order-1 hidden md:block">
-    <!-- <Picture
+    <!-- <Image
       src={heroImage}
       alt="Astronaut in the air"
       widths={[200, 400, 600]}
@@ -118,11 +118,9 @@ import featIcon1 from "assets/lowest-asset-icon.svg";
 <div class="flex gap-4 items-center justify-center mb-8 px-6">
   <div class="flex gap-4 items-start justify-center">
     <div class="mt-1 bg-black/10 rounded-full flex items-center justify-center p-1 w-20 h-20 shrink-0">
-      <Picture
+      <Image
         src={featIcon1}
         alt="Lowest fees"
-        widths={[80, 80]}
-        aspectRatio="4:4"
         sizes="(max-width: 80px) 80px, 70px"
         loading="eager"
         format="avif"
@@ -135,11 +133,9 @@ import featIcon1 from "assets/lowest-asset-icon.svg";
   </div>
   <div class="flex gap-4 items-start justify-center">
     <div class="mt-1 bg-black/10 rounded-full flex items-center justify-center p-1 w-20 h-20 shrink-0">
-      <Picture
+      <Image
         src={featIcon2}
         alt="Global access"
-        widths={[80, 80]}
-        aspectRatio="4:4"
         sizes="(max-width: 80px) 80px, 70px"
         loading="eager"
         format="avif"
@@ -152,11 +148,9 @@ import featIcon1 from "assets/lowest-asset-icon.svg";
   </div>
   <div class="flex gap-4 items-start justify-center">
     <div class="mt-1 bg-black/10 rounded-full flex items-center justify-center p-1 w-20 h-20 shrink-0">
-      <Picture
+      <Image
         src={featIcon3}
         alt="Lowest fees"
-        widths={[80, 80]}
-        aspectRatio="4:4"
         sizes="(max-width: 80px) 80px, 70px"
         loading="eager"
         format="avif"
