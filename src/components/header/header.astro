@@ -1,8 +1,7 @@
 ---
 // Server functions
-import TokenTab from "@components/header/tokentab.astro";
-import Modal from "@components/ui/modal.astro";
 import AccountNavDropDown from "@components/navbar/account-nav.astro";
+import Modal from "@components/ui/modal.astro";
 import Icon from "astro-icon";
 const tabList = [
   {
@@ -19,84 +18,22 @@ const tabList = [
   },
 ];
 
-import {
-  $dashboardData,
-  $tabs,
-  createNewTab,
-  removeTab,
-  selectTab,
-} from "../../stores/dashboard";
-// console.log($tabs.get(), ":::TABS");
+
+import AssetSearch from "./AssetSearch";
+import TabsList from "./TabsLIst";
+// console.log($tabs.get().length, ":::TABS");
 // $tabs.set([]);
 // await refreshTabData();
 ---
 
-<script src="../../stores/dashboard.ts">
-  const modal = document.querySelector("dialog");
-  const pairs = document.querySelectorAll("ul > li");
-  const input = document.querySelector("input");
-  const tokenList = document.getElementsByClassName("token-list");
-
-  console.log(input.value, "INput value", tokenList);
-  input.addEventListener("keypress", (event) => {
-    console.log(event.key, ":::Input value");
-  });
-
-  pairs.forEach((pair) => {
-    console.log(pairs, ":::Pairs");
-    pair.addEventListener("click", async () => {
-      console.log("Clicked ");
-      // const tokenId = pair.getAttribute('data-tokenId');
-      // console.log(tokenId, ":::tokenID");
-      // alert('Alert for clicked')
-      // await createNewTab(tokenId);
-
-      modal?.close();
-    });
-  });
-</script>
-
 <div
   class="sticky top-0 left-0 right-0 h-20 bg-slate-900/80 flex items-center justify-between">
-  <div
-    class="flex-auto flex items-center justify-start px-2 max-w-2xl overflow-x-scroll">
-    {
-      $tabs
-        .get()
-        .map((item) => (
-          <TokenTab
-            {...item}
-            selected={item.selected}
-            selectTab={selectTab}
-            removeTab={removeTab}
-          />
-        ))
-    }
-  </div>
+  <TabsList client:load />
   <Modal id="newtabmodal" open="Open modal">
     <main
       slot="main"
-      class="w-full grid items-center justify-center pr-12 pl-5 min-w-fit overflow-hidden h-full">
-      <input
-        type="text"
-        class="bg-slate-800 peer border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium w-full uppercase"
-        placeholder="BTC/ETH"
-      />
-      <div class="py-4 w-[760px] overflow-y-scroll h-full bg-green-200/30 mt-4">
-        <ul class="w-full h-auto list-none">
-          {
-            $dashboardData.get().map((data) => (
-              <li
-                class="flex justify-between items-center hover:bg-gray-400/40 px-4 hover:cursor-pointer token-list"
-                data-tokenId={data["id"]}>
-                <span class="text-left">{data["symbol"]}</span>
-                <span class="text-left flex-1 max-w-fit">{data["name"]}</span>
-                <span class="text-right">{data["price"].toFixed(2)}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      class="w-full grid items-start justify-items-start justify-center min-w-fit overflow-hidden h-full relative">
+      <AssetSearch client:only />
     </main>
     <button slot="close" class="mx-auto text-center absolute right-0 top-1">
       <Icon name="mdi:window-close" class="h-10 w-10 text-slate-300" />
@@ -104,7 +41,7 @@ import {
   </Modal>
   <div class="w-full grid items-center justify-end px-10">
     <AccountNavDropDown
-      title={"Practive account"}
+      title={"Practice account"}
       children={[
         {
           path: "/test",

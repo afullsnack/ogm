@@ -1,6 +1,7 @@
+import { persistentAtom } from "@nanostores/persistent";
 import { atom } from "nanostores";
 
-type HeaderData = {
+export type HeaderData = {
   pair: string;
   exchange: string;
   price: number;
@@ -10,7 +11,10 @@ type HeaderData = {
 };
 
 export const $dashboardData = atom<any[]>([]);
-export const $tabs = atom<HeaderData[]>([]);
+export const $tabs = persistentAtom<HeaderData[]>("tabs", [], {
+  encode: JSON.stringify,
+  decode: JSON.parse,
+});
 
 export const fetchDashboardData = async ({
   skip = 0,
@@ -27,13 +31,20 @@ export const fetchDashboardData = async ({
   $dashboardData.set(json["coins"]);
 };
 
-export const createNewTab = async (coin: string) => {
-  console.log(coin, ":::Data to add to header");
+export const addNewTab = (newTab: HeaderData) => {
+  try {
+    console.log(newTab, ":::Data to add to new Tab");
 
-  // Call market API to get the pair, exchange and price
-  const coinData = await getMarketData({ coin });
+    // Call market API to get the pair, exchange and price
 
-  $tabs.set([...$tabs.get(), coinData]);
+    $tabs.set([...$tabs.get(), newTab]);
+  } catch (e: any) {
+    throw new Error(e.message ?? e.toString());
+  }
+};
+
+export const getAllTabs = () => {
+  return $tabs.get();
 };
 
 export const removeTab = ({ coinId }: { coinId: string }) => {
@@ -43,13 +54,21 @@ export const removeTab = ({ coinId }: { coinId: string }) => {
 };
 
 export const selectTab = ({ coinId }: { coinId: string }) => {
+  console.log(coinId, ":::Select tab");
   const tabToUpdate = $tabs.get().find((value) => value.coinId === coinId);
   if (tabToUpdate) {
     const updatedTab = {
       ...tabToUpdate,
       selected: true,
     };
-    const filteredTabs = $tabs.get().filter((tab) => tab.coinId !== coinId);
+    const filteredTabs = $tabs
+      .get()
+      .filter((tab) => tab.coinId !== coinId)
+      .map((value: HeaderData) => ({
+        ...value,
+        selected: false,
+      }));
+
     filteredTabs.push(updatedTab);
 
     // Re-allocate
@@ -66,10 +85,11 @@ export const getMarketData = async ({
 
   const result = await fetch(API_URL);
   const json = await result.json();
+  console.log(coin, ":::Coin market data");
 
   const tokenData = await getTokenData({ coin });
 
-  if (!json && !tokenData)
+  if (!json && !tokenData) {
     return {
       pair: "Loading...",
       exchange: "Loading...",
@@ -78,6 +98,7 @@ export const getMarketData = async ({
       coinId: "Loading...",
       selected: false,
     };
+  }
 
   return {
     pair: json[0]["pair"],
