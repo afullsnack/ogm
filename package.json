@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "bunx --bun astro dev --host",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "bunx --bun astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/image": "^0.17.2",
     "@astrojs/mdx": "^0.19.7",
+    "@astrojs/netlify": "^3.0.3",
     "@astrojs/react": "^3.0.2",
     "@astrojs/sitemap": "^2.0.1",
     "@astrojs/tailwind": "^4.0.0",
