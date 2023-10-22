@@ -2,7 +2,7 @@
 
 const {id, open} = Astro.props;
 ---
-<style lang="scss">
+<style>
 dialog {
   position: fixed;
   left: 0%;
@@ -11,14 +11,14 @@ dialog {
   height: 100%;
   background-color: transparent;
   overflow: hidden;
-  &::backdrop {
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    background: rgba(10, 9, 9, 0.5);
-  }
+}
+dialog::backdrop {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background: rgba(10, 9, 9, 0.5);
 }
 </style>
 
