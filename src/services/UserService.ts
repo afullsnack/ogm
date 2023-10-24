@@ -14,7 +14,8 @@ export const loginWithPass = async (email: string, pass: string) => {
     const user = await pb.collection("users").authWithPassword(email, pass);
     console.log(user, "::USer collection");
     pb.authStore.exportToCookie({ httpOnly: false }, "pb_auth");
-    window.location.href = "http://localhost:3000/user/dashboard";
+    console.log(window.location.origin, ":::Origin");
+    window.location.href = `${window.location.origin}/user/dashboard`;
     // return user.record;
   } catch (e: any) {
     window.alert(e.toString());
@@ -59,7 +60,7 @@ export const registerNewUser = async ({
 export const logout = () => {
   // window.localStorage.removeItem("pocketbase_auth");
   pb.authStore.clear();
-  window.location.href = "http://localhost:3000/user";
+  window.location.href = `${window.location.origin}/user`;
 };
 
 export const isLoggedIn = () => {

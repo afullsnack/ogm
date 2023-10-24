@@ -1,11 +1,7 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { loginWithPass, registerNewUser } from "services/UserService";
 
-type IForm = {
-  children: ReactNode;
-};
-
-const OnboardForms: FC<IForm> = ({ children }) => {
+const OnboardForms: React.FC = () => {
   const [term, setTerm] = useState(false);
   const [view, setView] = useState<"login" | "register">("login");
   const [name, setName] = useState();
