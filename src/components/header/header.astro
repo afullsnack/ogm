@@ -1,24 +1,8 @@
 ---
 // Server functions
-import AccountNavDropDown from "@components/navbar/account-nav.astro";
+import AccountNav from "@components/navbar/account-nav.astro";
 import Modal from "@components/ui/modal.astro";
 import Icon from "astro-icon";
-const tabList = [
-  {
-    peer: "LTC/BTC",
-    market: "BINANCE",
-    price: 2.37,
-    selected: true,
-  },
-  {
-    peer: "BNB/BTC",
-    market: "BINANCE",
-    price: 1.53,
-    selected: false,
-  },
-];
-
-
 import AssetSearch from "./AssetSearch";
 import TabsList from "./TabsLIst";
 // console.log($tabs.get().length, ":::TABS");
@@ -39,43 +23,24 @@ import TabsList from "./TabsLIst";
       <Icon name="mdi:window-close" class="h-10 w-10 text-slate-300" />
     </button>
   </Modal>
-  <div class="w-full grid items-center justify-end px-10">
-    <AccountNavDropDown
-      title={"Practice account"}
-      children={[
-        {
-          path: "/test",
-          title: "Test",
-        },
-        {
-          path: "/test",
-          title: "Text",
-        },
-        {
-          path: "/test",
-          title: "Tester",
-        },
-      ]}
-      lastItem={[
-        {
-          path: "/test",
-          title: "Test",
-        },
-        {
-          path: "/test",
-          title: "Text",
-        },
-        {
-          path: "/test",
-          title: "Tester",
-        },
-      ].length - 1}
-    />
-    <!-- <span class="font-medium text-xs uppercase text-orange-500">
-      PRACTISE ACCOUNT
-    </span>
-    <span class="text-white font-medium text-lg">10,000.00</span> -->
-  </div>
+
+  <AccountNav
+    title="Demo account"
+    children={[
+      {
+        path: "/test",
+        title: "Test",
+      },
+      {
+        path: "/test",
+        title: "Text",
+      },
+      {
+        path: "/test",
+        title: "Tester",
+      },
+    ]}
+  />
 
   <div class="px-5">
     <Icon name="ic:sharp-notifications" class="w-8 h-8 text-white" />

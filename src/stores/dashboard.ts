@@ -1,4 +1,4 @@
-import { persistentAtom } from "@nanostores/persistent";
+import { persistentAtom, persistentMap } from "@nanostores/persistent";
 import { atom } from "nanostores";
 
 export type HeaderData = {
@@ -15,6 +15,22 @@ export const $tabs = persistentAtom<HeaderData[]>("tabs", [], {
   encode: JSON.stringify,
   decode: JSON.parse,
 });
+export const $accounts = persistentMap<Record<string, any>>("accounts:", {
+  activeAccount: "demo",
+  demoBalance: 0,
+  liveBalance: 0,
+});
+
+export const changeAccountType = (account: "demo" | "live") => {
+  $accounts.setKey("activeAccount", account);
+};
+
+export const setAggregateBalance = (balance: number) => {
+  $accounts.setKey(
+    $accounts.get()["activeAccount"] === "live" ? "liveBalance" : "demoBalance",
+    balance
+  );
+};
 
 export const fetchDashboardData = async ({
   skip = 0,
@@ -25,10 +41,14 @@ export const fetchDashboardData = async ({
 }) => {
   const ASSET_LIST_DATA_URL = `https://api.coinstats.app/public/v1/coins?skip=${skip}&limit=${limit}`;
 
-  const result = await fetch(ASSET_LIST_DATA_URL);
-  const json = await result.json();
-
-  $dashboardData.set(json["coins"]);
+  try {
+    const result = await fetch(ASSET_LIST_DATA_URL);
+    const json = await result.json();
+    $dashboardData.set(json["coins"]);
+  } catch (e: any) {
+    console.log(e.message ?? e.toString(), ":::fetchDashboardData_error");
+    window.alert(e.message ?? e.toString());
+  }
 };
 
 export const addNewTab = (newTab: HeaderData) => {
@@ -39,7 +59,8 @@ export const addNewTab = (newTab: HeaderData) => {
 
     $tabs.set([...$tabs.get(), newTab]);
   } catch (e: any) {
-    throw new Error(e.message ?? e.toString());
+    window.alert(e.message ?? e.toString());
+    console.log(e.message ?? e.toString(), ":::addNewTab_error");
   }
 };
 
@@ -83,13 +104,35 @@ export const getMarketData = async ({
 }): Promise<HeaderData> => {
   const API_URL = `https://api.coinstats.app/public/v1/markets?coinId=${coin}`;
 
-  const result = await fetch(API_URL);
-  const json = await result.json();
-  console.log(coin, ":::Coin market data");
+  try {
+    const result = await fetch(API_URL);
+    const json = await result.json();
+    console.log(coin, ":::Coin market data");
 
-  const tokenData = await getTokenData({ coin });
+    const tokenData = await getTokenData({ coin });
 
-  if (!json && !tokenData) {
+    if (!json && !tokenData) {
+      return {
+        pair: "Loading...",
+        exchange: "Loading...",
+        price: 0,
+        changeIn1h: 0,
+        coinId: "Loading...",
+        selected: false,
+      };
+    }
+
+    return {
+      pair: json[0]["pair"],
+      exchange: json[0]["exchange"],
+      price: json[0]["price"],
+      changeIn1h: tokenData["priceChange1h"],
+      coinId: tokenData["id"],
+      selected: false,
+    };
+  } catch (e: any) {
+    window.alert(e.message ?? e.toString());
+    console.log(e.message ?? e.toString());
     return {
       pair: "Loading...",
       exchange: "Loading...",
@@ -99,15 +142,6 @@ export const getMarketData = async ({
       selected: false,
     };
   }
-
-  return {
-    pair: json[0]["pair"],
-    exchange: json[0]["exchange"],
-    price: json[0]["price"],
-    changeIn1h: tokenData["priceChange1h"],
-    coinId: tokenData["id"],
-    selected: false,
-  };
 };
 
 export const refreshTabData = async () => {
@@ -129,8 +163,14 @@ export const getTokenData = async ({
 }): Promise<Array<any>> => {
   const API_URL = `https://api.coinstats.app/public/v1/coins/${coin}`;
 
-  const result = await fetch(API_URL);
-  const json = await result.json();
+  try {
+    const result = await fetch(API_URL);
+    const json = await result.json();
 
-  return json["coin"];
+    return json["coin"];
+  } catch (e: any) {
+    window.alert(e.message ?? e.toString());
+    console.log(e.message ?? e.toString(), ":::getToken_error");
+    return [];
+  }
 };

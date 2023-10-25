@@ -30,10 +30,12 @@ const TabsList = () => {
           selectTab={({ coinId }) => {
             selectTab({ coinId });
             setHeaderTabs(getAllTabs());
+            window.location.reload();
           }}
           removeTab={({ coinId }) => {
             removeTab({ coinId });
             setHeaderTabs(getAllTabs());
+            window.location.reload();
           }}
         />
       ))}

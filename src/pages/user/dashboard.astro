@@ -4,9 +4,15 @@ import { fetchDashboardData } from "../../stores/dashboard";
 import { isLoggedIn } from "services/UserService";
 
 await fetchDashboardData({ skip: 0, limit: 100 });
-if(!isLoggedIn()) {
+if (!isLoggedIn()) {
   Astro.redirect("/user");
 }
+
+import { $tabs, getAllTabs } from "../../stores/dashboard";
+const tabs = getAllTabs();
+const selectedTab = tabs.find((tab) => tab.selected);
+const tradingViewSymbol = `${"BINANCE"}:${selectedTab?.pair.replace("/", "")}`;
+console.log(tradingViewSymbol, ":::Trading View symbol");
 ---
 
 <DashboardLayout>
@@ -24,19 +30,19 @@ if(!isLoggedIn()) {
       <script type="text/javascript" src="https://s3.tradingview.com/tv.js"
       ></script>
       <script type="text/javascript">
-        new TradingView.widget({
-          autosize: true,
-          symbol: "BINANCE:BTCUSD",
-          interval: "D",
-          timezone: "Etc/UTC",
-          theme: "dark",
-          style: "1",
-          locale: "en",
-          enable_publishing: false,
-          withdateranges: true,
-          allow_symbol_change: true,
-          container_id: "tradingview_bb32a",
-        });
+      new TradingView.widget({
+        autosize: true,
+        symbol: `${tradingViewSymbol ?? "BINANCE:BTCUSD"}`,
+        interval: "D",
+        timezone: "Etc/UTC",
+        theme: "dark",
+        style: "1",
+        locale: "en",
+        enable_publishing: false,
+        withdateranges: true,
+        allow_symbol_change: true,
+        container_id: "tradingview_bb32a",
+      });
       </script>
     </div>
     <!-- TradingView Widget END -->
