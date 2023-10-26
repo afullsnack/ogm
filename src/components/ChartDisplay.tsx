@@ -8,10 +8,10 @@ let tvScriptLoadingPromise;
 
 export default function TradingViewWidget() {
   const onLoadScriptRef = useRef(null);
+  const [chartToken, setChartToken] = useState("");
 
   useEffect(() => {
-    // onLoadScriptRef.current =
-    createWidget();
+    onLoadScriptRef.current = createWidget;
     let script;
     console.log("No trading view object yet");
 
@@ -27,7 +27,9 @@ export default function TradingViewWidget() {
       });
     }
 
-    tvScriptLoadingPromise.then(() => onLoadScriptRef.current);
+    tvScriptLoadingPromise.then(() => onLoadScriptRef.current());
+    console.log(tvScriptLoadingPromise, "::: script loading ");
+    // createWidget();
 
     return () => {
       document.head.removeChild(script);
@@ -38,9 +40,9 @@ export default function TradingViewWidget() {
         document.getElementById("tradingview_f9942") &&
         "TradingView" in window
       ) {
-        new window.TradingView.widget({
+        new (window as any).TradingView.widget({
           autosize: true,
-          symbol: "NASDAQ:AAPL",
+          symbol: chartToken ?? "OKEX:STETHUSDT",
           interval: "D",
           timezone: "Etc/UTC",
           theme: "dark",
@@ -52,36 +54,30 @@ export default function TradingViewWidget() {
         });
       } else {
         console.log("No trading view object yet");
-        window.alert("No trading view object in window");
-        new window.TradingView.widget({
-          autosize: true,
-          symbol: "NASDAQ:AAPL",
-          interval: "D",
-          timezone: "Etc/UTC",
-          theme: "dark",
-          style: "1",
-          locale: "en",
-          enable_publishing: false,
-          allow_symbol_change: true,
-          container_id: "tradingview_f9942",
-        });
       }
     }
-  }, []);
+  }, [chartToken]);
 
   const tabs = useStore($tabs);
   const [headerTabs, setHeaderTabs] = useState([...tabs]);
 
   useEffect(() => {
     setHeaderTabs(getAllTabs());
+    const selected = getAllTabs().find((val) => val.selected);
+    const exchange = selected.exchange.toLocaleLowerCase().includes("binance")
+      ? "BINANCE"
+      : selected.exchange.toUpperCase();
+    const assetPair = selected.pair.replace("/", "");
+
     console.log(tabs, "::: useStore_Tabs");
-    console.log(headerTabs, "::: localStorage_Tabs_from dashboard");
+    console.log(exchange, assetPair, "::: Asset and pair");
+    setChartToken((_) => `${exchange}:${assetPair}`);
   }, [headerTabs]);
 
   return (
     <div className="tradingview-widget-container h-full">
-      <div id="tradingview_f9942" className="w-full h-full" />
-      <div className="tradingview-widget-copyright">
+      <div id="tradingview_f9942" className="w-full h-full z-0" />
+      {/* <div className="tradingview-widget-copyright">
         <a
           href="https://www.tradingview.com/"
           rel="noopener nofollow"
@@ -90,7 +86,7 @@ export default function TradingViewWidget() {
             Track all markets on TradingView
           </span>
         </a>
-      </div>
+      </div> */}
     </div>
   );
 }

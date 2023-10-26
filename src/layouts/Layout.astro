@@ -3,6 +3,7 @@ import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
 import "@fontsource-variable/inter/index.css";
 import { SEO } from "astro-seo";
+import "../utils/global.css";
 
 export interface Props {
   title: string;
@@ -12,7 +13,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 
 const resolvedImageWithDomain = new URL(
   "/opengraph.jpg",
-  Astro.site
+  Astro.site,
 ).toString();
 
 const { title } = Astro.props;
@@ -22,7 +23,7 @@ const makeTitle = title
   : "Astroship - Starter Template for Astro with Tailwind CSS";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -67,6 +68,7 @@ const makeTitle = title
     </style>
 
     <!-- Tidio chat code -->
-    <script src="//code.tidio.co/iq2qipotps6urp8h4c4yzwhytrpdoxia.js" async></script>
+    <script src="//code.tidio.co/iq2qipotps6urp8h4c4yzwhytrpdoxia.js" async
+    ></script>
   </body>
 </html>

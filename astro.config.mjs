@@ -9,7 +9,14 @@ import netlify from "@astrojs/netlify/functions";
 // https://astro.build/config
 export default defineConfig({
   site: "https://astroship.web3templates.com",
-  integrations: [tailwind(), mdx(), sitemap(), react()],
+  integrations: [
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    mdx(),
+    sitemap(),
+    react(),
+  ],
   output: "server",
   adapter: netlify(),
 });

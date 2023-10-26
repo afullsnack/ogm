@@ -8,7 +8,7 @@ const QRCodeComp: FC = () => {
   // TODO: also save in the db as the users auth
 
   return (
-    <div class="p-2 bg-white flex items-center justify-center">
+    <div className="p-2 bg-white flex items-center justify-center">
       <QRCodeSVG value={generatedSecret()} size={280} />
     </div>
   );
