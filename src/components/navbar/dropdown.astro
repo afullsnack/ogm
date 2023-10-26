@@ -1,4 +1,7 @@
 ---
+import DepositQR from "@components/DepositQr";
+import DepositModal from "@components/ui/depositModal.astro";
+import Icon from "astro-icon";
 import { Dropdown as DropdownContainer, DropdownItems } from "astro-navbar";
 import { changeAccountType } from "../../stores/dashboard";
 const { title, lastItem, children } = Astro.props;
@@ -66,19 +69,80 @@ const liveBalance = 0;
               >
             </button>
             <!-- FLow for live button click bring up deposit modal with payment addresses and networks -->
-            <button
-              class="grid px-2 py-1 items-start justify-items-start justify-center gap-1 text-green-600 hover:text-green-400 bg-gray-700/50 hover:bg-slate-400/20 active:bg-slate-400/30"
-              onclick={`${changeAccountType("live")}`}>
-              <span>{"Live account"}</span>
-              <span class="text-lg line-clamp-2 font-bold"
-                >${
-                  liveBalance.toLocaleString("en-US", {
-                    maximumFractionDigits: 2,
-                    minimumFractionDigits: 2,
-                  })
-                }</span
-              >
-            </button>
+            <DepositModal
+              id="depositModal"
+              open="Open modal"
+              liveBalance={liveBalance}>
+              <main
+                slot="main"
+                class="w-full grid items-start justify-items-start justify-center min-w-fit overflow-y-scroll h-full relative">
+                <label class="grid items-start mt-10 gap-2">
+                  <span
+                    class="capitalize lg:text-lg font-bold text-xl mb-1 text-white"
+                    >BTC DEPOSIT</span
+                  >
+                  <DepositQR
+                    address={"3KSFShFwm27bGPhfXttPyUGL4kZEmD7E8G"}
+                    client:only
+                  />
+                  <input
+                    type="number"
+                    class="bg-slate-800 w-[300px] border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium"
+                    placeholder="Enter amount to deposit"
+                  />
+                  <button
+                    class="bg-blue-500 text-white hover:bg-blue-400 px-2 py-1 w-full h-10 active:bg-blue-600 tracking-wide mx-auto"
+                    >I HAVE MADE THIS DEPOSIT</button
+                  >
+                </label>
+                <label class="grid items-start mt-10 gap-2">
+                  <span
+                    class="capitalize lg:text-lg font-bold text-xl mb-1 text-white"
+                    >ETH(ERC20) DEPOSIT</span
+                  >
+                  <DepositQR
+                    address={"0x46c4fB880819F6a77433eF996d317Cc9ABc15391"}
+                    client:only
+                  />
+                  <input
+                    type="number"
+                    class="bg-slate-800 w-[300px] border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium"
+                    placeholder="Enter amount to deposit"
+                  />
+                  <button
+                    class="bg-blue-500 text-white hover:bg-blue-400 px-2 py-1 w-full h-10 active:bg-blue-600 tracking-wide mx-auto"
+                    >I HAVE MADE THIS DEPOSIT</button
+                  >
+                </label>
+                <label class="grid items-start mt-10 gap-2">
+                  <span
+                    class="capitalize lg:text-lg font-bold text-xl mb-1 text-white"
+                    >USDT(ERC20) DEPOSIT</span
+                  >
+                  <DepositQR
+                    address={"0x46c4fB880819F6a77433eF996d317Cc9ABc15391"}
+                    client:only
+                  />
+                  <input
+                    type="number"
+                    class="bg-slate-800 w-[300px] border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium"
+                    placeholder="Enter amount to deposit"
+                  />
+                  <button
+                    class="bg-blue-500 text-white hover:bg-blue-400 px-2 py-1 w-full h-10 active:bg-blue-600 tracking-wide mx-auto"
+                    >I HAVE MADE THIS DEPOSIT</button
+                  >
+                </label>
+              </main>
+              <button
+                slot="close"
+                class="mx-auto text-center absolute right-0 top-1">
+                <Icon
+                  name="mdi:window-close"
+                  class="h-10 w-10 text-slate-300"
+                />
+              </button>
+            </DepositModal>
           </div>
         </div>
       </div>

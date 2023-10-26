@@ -40,6 +40,7 @@ const UserSettingsDetails: FC = () => {
           type="text"
           className="bg-slate-800 border-gray-400/50 rounded-md caret-current border px-2 py-1 text-white outline-none font-medium"
           placeholder="ENGLISH"
+          defaultValue="ENGLISH"
         />
       </label>
       <label className="grid items-start">
@@ -48,6 +49,7 @@ const UserSettingsDetails: FC = () => {
           type="text"
           className="bg-slate-800 border-gray-400/50 rounded-md caret-current border px-2 py-1 text-white outline-none font-medium"
           placeholder="USD"
+          defaultValue="USD"
         />
       </label>
       <label className="grid items-start">
