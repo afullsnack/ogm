@@ -1,14 +1,15 @@
 ---
+import TradingViewWidget from "@components/ChartDisplay";
 import DashboardLayout from "@layouts/DashboardLayout.astro";
-import { fetchDashboardData } from "../../stores/dashboard";
 import { isLoggedIn } from "services/UserService";
+import { fetchDashboardData } from "../../stores/dashboard";
 
 await fetchDashboardData({ skip: 0, limit: 100 });
 if (!isLoggedIn()) {
   Astro.redirect("/user");
 }
 
-import { $tabs, getAllTabs } from "../../stores/dashboard";
+import { getAllTabs } from "../../stores/dashboard";
 const tabs = getAllTabs();
 const selectedTab = tabs.find((tab) => tab.selected);
 const tradingViewSymbol = `${"BINANCE"}:${selectedTab?.pair.replace("/", "")}`;
@@ -17,34 +18,6 @@ console.log(tradingViewSymbol, ":::Trading View symbol");
 
 <DashboardLayout>
   <div class="grid w-full h-full p-2">
-    <!-- TradingView Widget BEGIN -->
-    <div class="tradingview-widget-container h-full">
-      <div id="tradingview_bb32a h-full"></div>
-      <!-- <div class="tradingview-widget-copyright">
-        <a
-          href="https://www.tradingview.com/"
-          rel="noopener nofollow"
-          target="_blank"
-          ><span class="blue-text">Track all markets on TradingView</span></a>
-      </div> -->
-      <script type="text/javascript" src="https://s3.tradingview.com/tv.js"
-      ></script>
-      <script type="text/javascript">
-      new TradingView.widget({
-        autosize: true,
-        symbol: `${tradingViewSymbol ?? "BINANCE:BTCUSD"}`,
-        interval: "D",
-        timezone: "Etc/UTC",
-        theme: "dark",
-        style: "1",
-        locale: "en",
-        enable_publishing: false,
-        withdateranges: true,
-        allow_symbol_change: true,
-        container_id: "tradingview_bb32a",
-      });
-      </script>
-    </div>
-    <!-- TradingView Widget END -->
+    <TradingViewWidget client:load />
   </div>
 </DashboardLayout>

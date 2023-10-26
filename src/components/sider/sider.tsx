@@ -33,7 +33,7 @@ const Sider: FC = () => {
       link: "today",
     },
     {
-      title: "SETTINGS",
+      title: "PROFILE",
       icon: <User className="w-6 h-6 text-white" />,
       link: "settings",
     },
