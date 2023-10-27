@@ -13,16 +13,16 @@ if (isLoggedIn()) {
 <div
   class="bg-gradient-to-r bg-black from-blue-500 to-red-400 w-full h-screen text-white grid items-center justify-center justify-items-center">
   <div
-    class="max-w-4xl w-screen h-[540px] max-h-fit bg-white mx-auto my-0 flex items-center justify-items-stretch rounded-md overflow-hidden">
-    <div class="p-6 min-w-[320px] max-w-[320px] grid">
+    class="max-w-lg lg:w-screen h-[540px] max-h-fit bg-white mx-auto my-0 flex items-center justify-items-stretch rounded-md overflow-hidden">
+    <div class="p-6 grid w-full">
       <OnboardForms client:load />
     </div>
-    <div
+    <!-- <div
       class="flex-auto bg-contain bg-no-repeat bg-center bg-black/90 h-full"
       style="background-image: url(/user-side-bg.jpeg);">
-    </div>
+    </div> -->
   </div>
-  <div class="max-w-4xl w-screen items-start justify-end flex">
+  <div class="max-w-4xl w-screen items-start justify-end flex gap-2">
     <button class="text-sm">TERMS OF SERVICE</button>
     <button>PRIVACY POLICY</button>
   </div>

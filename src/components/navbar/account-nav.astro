@@ -8,11 +8,7 @@ const { title, children } = Astro.props;
   <Astronav>
     <MenuItems>
       <div class="w-full grid items-center justify-start">
-        <Dropdown
-          title={title}
-          children={children}
-          lastItem={children.length - 1}
-        />
+        <Dropdown title={title} />
       </div>
     </MenuItems>
   </Astronav>

@@ -4,12 +4,12 @@ import DepositModal from "@components/ui/depositModal.astro";
 import Icon from "astro-icon";
 import { Dropdown as DropdownContainer, DropdownItems } from "astro-navbar";
 import { changeAccountType } from "../../stores/dashboard";
-const { title, lastItem, children } = Astro.props;
+const { title } = Astro.props;
 const balance = 10000;
 const liveBalance = 0;
 ---
 
-<div class="relative max-w-max w-[400px">
+<div class="relative max-w-max w-[400px z-50">
   <DropdownContainer class="group">
     <button
       class="grid items-start justify-items-start justify-center gap-1 text-gray-200 hover:text-gray-400">
@@ -37,14 +37,14 @@ const liveBalance = 0;
         }</span
       >
     </button>
-    <DropdownItems class="w-auto">
+    <DropdownItems class="w-auto z-50">
       <div
         class:list={[
-          "absolute w-[500px] lg:w-[450px] z-10",
+          "absolute w-[500px] lg:w-[450px] z-50",
           "lg:right-0 origin-top-right right-1",
         ]}>
         <div
-          class="px-3 lg:py-2 bg-slate-900 rounded-md shadow border flex gap-2 w-full justify-between border-r border-gray-300">
+          class="px-3 lg:py-2 bg-slate-900 rounded-md shadow border flex gap-2 w-full justify-between border-r border-gray-300 z-50">
           <div class="text-white grid items-start">
             <span>ASSET BALANCES</span>
             <ul class="list-none grid items-center justify-start gap-1 text-xs">
