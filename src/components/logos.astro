@@ -5,14 +5,13 @@ import Press2 from "assets/press-2.svg";
 import Press3 from "assets/press-3.svg";
 import Press4 from "assets/press-4.svg";
 
-
 import { Image } from "astro:assets";
 
 const press = [Press1, Press2, Press3, Press4];
 ---
 
 <div class="mt-24">
-  <h2 class="text-center text-slate-500">We are in the press.</h2>
+  <h2 class="text-center text-slate-500 font-bold">We are in the press.</h2>
   <div class="flex gap-8 md:gap-20 items-center justify-center mt-10 flex-wrap">
     {
       press.map((item) => (

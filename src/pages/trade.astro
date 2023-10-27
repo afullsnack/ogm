@@ -64,7 +64,7 @@ const pricing = [
         
       </Fragment>
     </Sectionhead> -->
-    <div class="flex items-center justify-center">
+    <div class="lg:flex grid items-center justify-center">
       <div class="grid items-center justify-center">
         <h1 class="font-bold text-3xl">Trading products</h1>
         <span
@@ -75,7 +75,7 @@ const pricing = [
 
       <div class="grid w-full">
       <div
-        class="flex gap-10 items-center justify-center w-full mt-5 border-l border-l-gray-400">
+        class="flex flex-wrap gap-10 items-center justify-center w-full mt-5 border-t border-t-gray-400 p-2 lg:border-l lg:border-l-gray-400">
         <div class="grid items-center justify-center justify-items-center">
           <div
             class="rounded-full w-16 h-16 bg-gray-300 grid items-center outline-none justify-center">
@@ -121,50 +121,50 @@ const pricing = [
       </div>
       <div class="w-full px-4 mt-5">
         <!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
-  <!-- <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div> -->
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-  {
-  "symbols": [
-    {
-      "proName": "FOREXCOM:SPXUSD",
-      "title": "S&P 500"
-    },
-    {
-      "proName": "FOREXCOM:NSXUSD",
-      "title": "US 100"
-    },
-    {
-      "proName": "FX_IDC:EURUSD",
-      "title": "EUR to USD"
-    },
-    {
-      "proName": "BITSTAMP:BTCUSD",
-      "title": "Bitcoin"
-    },
-    {
-      "proName": "BITSTAMP:ETHUSD",
-      "title": "Ethereum"
-    },
-    {
-      "description": "Bitcoin",
-      "proName": "BINANCE:BTCUSDT"
-    }
-  ],
-  "colorTheme": "dark",
-  "isTransparent": false,
-  "showSymbolLogo": true,
-  "locale": "en"
-}
-  </script>
-</div>
+      <div class="tradingview-widget-container w-full">
+        <div class="tradingview-widget-container__widget"></div>
+        <!-- <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div> -->
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+        {
+          "symbols": [
+            {
+              "proName": "FOREXCOM:SPXUSD",
+              "title": "S&P 500"
+            },
+            {
+              "proName": "FOREXCOM:NSXUSD",
+              "title": "US 100"
+            },
+            {
+              "proName": "FX_IDC:EURUSD",
+              "title": "EUR to USD"
+            },
+            {
+              "proName": "BITSTAMP:BTCUSD",
+              "title": "Bitcoin"
+            },
+            {
+              "proName": "BITSTAMP:ETHUSD",
+              "title": "Ethereum"
+            },
+            {
+              "description": "Bitcoin",
+              "proName": "BINANCE:BTCUSDT"
+            }
+          ],
+            "colorTheme": "dark",
+              "isTransparent": false,
+                "showSymbolLogo": true,
+                  "locale": "en"
+        }
+        </script>
+      </div>
 <!-- TradingView Widget END -->
       </div>
     </div>
     </div>
 
-    <div class="grid grid-cols-5 gap-4 mt-40 max-w-4xl mx-auto">
+    <div class="grid justify-center md:grid-cols-5 gap-4 mt-40 max-w-4xl mx-auto">
       <div class="grid items-center justify-items-center text-center w-40">
         <h1 class="font-bold text-gray-600/90">Wide Range of Trading Instruments</h1>
       </div>
@@ -186,7 +186,7 @@ const pricing = [
     </div>
   </Container>
   <div class="px-20 mt-20">
-    <div class="w-full flex justify-between items-center p-10 rounded-lg bg-slate-400/30 mx-auto max-w-7xl">
+    <div class="w-full lg:flex gap-2 grid justify-between items-center p-10 rounded-lg bg-slate-400/30 mx-auto max-w-7xl">
       <h1 class="text-xl font-bold">Trade and get free commisions Today. It's that easy!</h1>
       <Link
       size="md"
@@ -194,7 +194,8 @@ const pricing = [
       rel="noopener"
       href="/user"
       class="flex gap-1 items-center justify-centers text-sm bg-blue-600"
-      target="_blank">
+      target="_blank"
+      class:list={["w-fit"]}>
       <!-- <Icon class="text-black w-4 h-4" name="bx:bxl-github" /> -->
       OPEN AN ACCOUNT
     </Link>

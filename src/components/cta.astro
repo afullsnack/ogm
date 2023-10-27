@@ -91,25 +91,25 @@ const stats = [
     </Link>
   </div>
 
-  <div class="grid mt-10 mb-10 w-[720px] h-[620px] max-h-fit">
+  <div class="grid mt-10 mb-10 lg:w-[720px] lg:h-[620px] w-full h-[300px] max-h-min lg:max-h-fit">
     <!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
-  <!-- <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div> -->
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
-  {
-  "width": "100%",
-  "height": "100%",
-  "defaultColumn": "performance",
-  "defaultScreen": "general",
-  "market": "crypto",
-  "showToolbar": false,
-  "colorTheme": "dark",
-  "locale": "en",
-  "isTransparent": false
-}
-  </script>
-</div>
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <!-- <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div> -->
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+      {
+        "width": "100%",
+          "height": "100%",
+            "defaultColumn": "performance",
+              "defaultScreen": "general",
+                "market": "crypto",
+                  "showToolbar": false,
+                    "colorTheme": "dark",
+                      "locale": "en",
+                        "isTransparent": false
+      }
+      </script>
+    </div>
 <!-- TradingView Widget END -->
   </div>
 
@@ -120,10 +120,10 @@ const stats = [
     <p class="text-slate-400 mt-4 text-lg md:text-xl">
       Get analysis, signals and actionable trade ideas from our expert analysts.
     </p>
-    <div class="flex gap-3 items-stretch justify-center mt-5">
+    <div class="lg:flex grid gap-3 items-center justify-stretch lg:items-stretch lg:justify-center mt-5">
       {
         varieties.map((item) => (
-          <div class="w-1/4 bg-slate-700 text-white grid gap-6 p-5 text-start rounded-md">
+          <div class="lg:w-1/4 w-full bg-slate-700 text-white grid gap-6 p-5 text-start rounded-md">
             <h4 class="font-bold text-sm flex items-center justify-start gap-3">
               <div class="rounded-full w-8 h-8 flex items-center justify-center bg-red-400">
                 <span class="text-[8px] font-bold">{item.img}</span>
@@ -143,10 +143,10 @@ const stats = [
     </div>
   </div>
   <div class="mt-20">
-    <h2 class="text-black text-4xl md:text-3xl tracking-tight font-bold">
+    <h2 class="text-black text-xl md:text-3xl tracking-tight font-bold">
       Trade with <b class="text-blue-600">world-leading</b> broker.
     </h2>
-    <div class="flex gap-3 items-stretch justify-center mt-5">
+    <div class="lg:flex grid gap-3 items-stretch justify-center mt-5">
       {
         stats.map((item) => (
           <div class="w-44 text-white grid gap-6 p-5 items-center justify-center text-center border-b-blue-600/60 border-b">
