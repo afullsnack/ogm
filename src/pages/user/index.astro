@@ -18,7 +18,7 @@ if (isLoggedIn()) {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
   </head>
-  <body class="grid w-screen h-screen bg-slate-800">
+  <body class="grid w-screen h-screen">
     <div
       class="bg-gradient-to-r bg-black from-blue-500 to-red-400 w-screen h-screen text-white grid items-center justify-center justify-items-center">
       <div class="w-full bg-white rounded-md">
@@ -26,7 +26,7 @@ if (isLoggedIn()) {
           <OnboardForms client:load />
         </div>
       </div>
-      <div class="w-screen items-start justify-end flex gap-2 px-4">
+      <div class="w-screen items-center justify-end flex gap-2 px-4">
         <button class="text-sm">TERMS OF SERVICE</button>
         <button>PRIVACY POLICY</button>
       </div>
