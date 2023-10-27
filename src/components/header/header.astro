@@ -12,17 +12,19 @@ import TabsList from "./TabsLIst";
 
 <div
   class="sticky top-0 left-0 right-0 h-20 bg-slate-900/80 flex items-center justify-between">
-  <TabsList client:load />
-  <Modal id="newtabmodal" open="Open modal">
-    <main
-      slot="main"
-      class="w-full grid items-start justify-items-start justify-center min-w-fit overflow-hidden h-full relative">
-      <AssetSearch client:only />
-    </main>
-    <button slot="close" class="mx-auto text-center absolute right-0 top-1">
-      <Icon name="mdi:window-close" class="h-10 w-10 text-slate-300" />
-    </button>
-  </Modal>
+  <div class="flex items-center justify-center gap-2">
+    <TabsList client:load />
+    <Modal id="newtabmodal" open="Open modal">
+      <main
+        slot="main"
+        class="w-full grid items-start justify-items-start justify-center min-w-fit overflow-hidden h-full relative">
+        <AssetSearch client:only />
+      </main>
+      <button slot="close" class="mx-auto text-center absolute right-0 top-1">
+        <Icon name="mdi:window-close" class="h-10 w-10 text-slate-300" />
+      </button>
+    </Modal>
+  </div>
 
   <AccountNav title="Demo account" />
 

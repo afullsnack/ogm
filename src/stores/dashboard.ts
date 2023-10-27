@@ -63,7 +63,10 @@ export const addNewTab = (newTab: HeaderData) => {
 
     // Call market API to get the pair, exchange and price
 
-    $tabs.set([...$tabs.get(), newTab]);
+    $tabs.set([
+      ...$tabs.get().map((value) => ({ ...value, selected: false })),
+      { ...newTab, selected: true },
+    ]);
   } catch (e: any) {
     window.alert(e.message ?? e.toString());
     console.log(e.message ?? e.toString(), ":::addNewTab_error");
@@ -76,31 +79,30 @@ export const getAllTabs = () => {
 
 export const removeTab = ({ coinId }: { coinId: string }) => {
   // remove tab when X clicked
-
-  $tabs.set($tabs.get().filter((tab) => tab.coinId !== coinId));
+  const filteredTabs = $tabs.get().filter((tab) => tab.coinId !== coinId);
+  $tabs.set(
+    filteredTabs.map((value, index) =>
+      index === 0 ? { ...value, selected: true } : { ...value, selected: false }
+    )
+  );
 };
 
 export const selectTab = ({ coinId }: { coinId: string }) => {
   console.log(coinId, ":::Select tab");
-  const tabToUpdate = $tabs.get().find((value) => value.coinId === coinId);
-  if (tabToUpdate) {
-    const updatedTab = {
-      ...tabToUpdate,
-      selected: true,
-    };
-    const filteredTabs = $tabs
-      .get()
-      .filter((tab) => tab.coinId !== coinId)
-      .map((value: HeaderData) => ({
-        ...value,
-        selected: false,
-      }));
+  const filteredTabs = $tabs.get().map((value: HeaderData) =>
+    value.coinId === coinId
+      ? {
+          ...value,
+          selected: true,
+        }
+      : {
+          ...value,
+          selected: false,
+        }
+  );
 
-    filteredTabs.push(updatedTab);
-
-    // Re-allocate
-    $tabs.set(filteredTabs);
-  }
+  // Re-allocate
+  $tabs.set(filteredTabs);
 };
 
 export const getMarketData = async ({
