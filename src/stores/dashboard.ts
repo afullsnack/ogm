@@ -33,18 +33,24 @@ export const setAggregateBalance = (balance: number) => {
 };
 
 export const fetchDashboardData = async ({
-  skip = 0,
+  page = 1,
   limit = 100,
 }: {
-  skip: number;
+  page: number;
   limit: number;
 }) => {
-  const ASSET_LIST_DATA_URL = `https://api.coinstats.app/public/v1/coins?skip=${skip}&limit=${limit}`;
+  const ASSET_LIST_DATA_URL = `${
+    import.meta.env.PUBLIC_COIN_STATS_URL
+  }/coins?page=${page}&limit=${limit}`;
 
   try {
-    const result = await fetch(ASSET_LIST_DATA_URL);
+    const result = await fetch(ASSET_LIST_DATA_URL, {
+      headers: {
+        "X-API-KEY": import.meta.env.PUBLIC_COIN_STATS_API_KEY,
+      },
+    });
     const json = await result.json();
-    $dashboardData.set(json["coins"]);
+    $dashboardData.set(json["result"]);
   } catch (e: any) {
     console.log(e.message ?? e.toString(), ":::fetchDashboardData_error");
     window.alert(e.message ?? e.toString());

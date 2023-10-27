@@ -13,13 +13,11 @@ const AssetSearch: FC = () => {
 
   useEffect(() => {
     async function waitForFetch() {
-      await fetchDashboardData({ skip: 0, limit: 100 });
+      await fetchDashboardData({ page: 1, limit: 100 });
     }
 
     waitForFetch();
   }, []);
-
-  // const handleAssetClick = useCallback()
 
   return (
     <>
@@ -31,7 +29,8 @@ const AssetSearch: FC = () => {
       />
       <div className="py-4 rounded-lg overflow-y-scroll h-full bg-slate-700/90 mt-1 absolute top-14 left-40 right-40 md:left-20 md:right-20">
         <ul className="w-full h-auto list-none">
-          {!!dashboardData.length &&
+          {dashboardData &&
+            !!dashboardData.length &&
             dashboardData
               .filter(
                 (value) =>

@@ -4,16 +4,10 @@ import DashboardLayout from "@layouts/DashboardLayout.astro";
 import { isLoggedIn } from "services/UserService";
 import { fetchDashboardData } from "../../stores/dashboard";
 
-await fetchDashboardData({ skip: 0, limit: 100 });
+await fetchDashboardData({ page: 1, limit: 100 });
 if (!isLoggedIn()) {
   Astro.redirect("/user");
 }
-
-import { getAllTabs } from "../../stores/dashboard";
-const tabs = getAllTabs();
-const selectedTab = tabs.find((tab) => tab.selected);
-const tradingViewSymbol = `${"BINANCE"}:${selectedTab?.pair.replace("/", "")}`;
-console.log(tradingViewSymbol, ":::Trading View symbol");
 ---
 
 <DashboardLayout>
