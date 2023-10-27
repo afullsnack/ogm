@@ -10,20 +10,26 @@ if (isLoggedIn()) {
 }
 ---
 
-<div
-  class="bg-gradient-to-r bg-black from-blue-500 to-red-400 w-full h-screen text-white grid items-center justify-center justify-items-center">
-  <div
-    class="max-w-3xl w-full lg:w-screen h-[540px] max-h-fit bg-white mx-auto my-0 flex items-center justify-items-stretch rounded-md overflow-hidden">
-    <div class="p-6 grid w-full">
-      <OnboardForms client:load />
+<!doctype html>
+<html lang="en" class="h-screen">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body class="grid w-screen h-screen bg-slate-800">
+    <div
+      class="bg-gradient-to-r bg-black from-blue-500 to-red-400 w-screen h-screen text-white grid items-center justify-center justify-items-center">
+      <div class="w-full bg-white rounded-md">
+        <div class="p-6 grid w-full">
+          <OnboardForms client:load />
+        </div>
+      </div>
+      <div class="w-screen items-start justify-end flex gap-2 px-4">
+        <button class="text-sm">TERMS OF SERVICE</button>
+        <button>PRIVACY POLICY</button>
+      </div>
     </div>
-    <!-- <div
-      class="flex-auto bg-contain bg-no-repeat bg-center bg-black/90 h-full"
-      style="background-image: url(/user-side-bg.jpeg);">
-    </div> -->
-  </div>
-  <div class="max-w-4xl w-screen items-start justify-end flex gap-2">
-    <button class="text-sm">TERMS OF SERVICE</button>
-    <button>PRIVACY POLICY</button>
-  </div>
-</div>
+  </body>
+</html>
