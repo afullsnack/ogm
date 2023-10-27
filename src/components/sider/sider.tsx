@@ -74,7 +74,7 @@ const Sider: FC = () => {
   }, [watchListExpanded]);
 
   return (
-    <aside className="sticky left-0 top-20 bottom-0 w-[70px] h-calc bg-slate-900/80 grid items-start justify-center justify-items-center z-10">
+    <aside className="sticky left-0 top-20 bottom-0 w-[70px] h-calc bg-slate-900/80 grid items-start justify-center justify-items-center -z-50">
       <PanesContext.Provider
         value={{
           historyExpanded,
