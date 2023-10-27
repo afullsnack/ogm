@@ -21,7 +21,7 @@ const TabsList = () => {
   }, [headerTabs]);
 
   return (
-    <div className="flex-auto flex items-center justify-start px-2 max-w-2xl overflow-x-scroll w-full no-scrollbar">
+    <div className="flex-auto flex items-center justify-start px-2 lg:max-w-2xl max-w-xs overflow-x-scroll w-full no-scrollbar">
       {headerTabs.map((item: HeaderData, index: number) => (
         <TokenTab
           {...item}

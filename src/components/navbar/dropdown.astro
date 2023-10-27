@@ -9,7 +9,7 @@ const balance = 10000;
 const liveBalance = 0;
 ---
 
-<div class="relative max-w-max w-[400px z-50">
+<div class="relative max-w-max lg:w-[400px] w-fit z-50">
   <DropdownContainer class="group">
     <button
       class="grid items-start justify-items-start justify-center gap-1 text-gray-200 hover:text-gray-400">
@@ -40,7 +40,7 @@ const liveBalance = 0;
     <DropdownItems class="w-auto z-50">
       <div
         class:list={[
-          "absolute w-[500px] lg:w-[450px] z-50",
+          "absolute w-fit lg:w-[450px] z-50",
           "lg:right-0 origin-top-right right-1",
         ]}>
         <div
@@ -56,9 +56,9 @@ const liveBalance = 0;
           <div class="grid text-white items-start justify-end gap-2">
             <span>SWITCH TO ACCOUNT</span>
             <button
-              class="grid px-2 py-1 items-start justify-items-start justify-center gap-1 text-orange-600 hover:text-orange-400 bg-gray-700/50 hover:bg-slate-400/20 active:bg-slate-400/30"
+              class="grid px-2 py-1 items-start text-clip justify-items-start justify-center gap-1 text-orange-600 hover:text-orange-400 bg-gray-700/50 hover:bg-slate-400/20 active:bg-slate-400/30"
               onclick={`${changeAccountType("demo")}`}>
-              <span>{title}</span>
+              <span>{"Demo account"}</span>
               <span class="text-lg line-clamp-2 font-bold"
                 >${
                   balance.toLocaleString("en-US", {

@@ -4,10 +4,11 @@ import Dropdown from "./dropdown.astro";
 const { title, children } = Astro.props;
 ---
 
-<div class="w-full grid items-center justify-end px-5">
+<div
+  class="lg:w-full w-fit grid items-center lg:justify-end justify-start px-5">
   <Astronav>
     <MenuItems>
-      <div class="w-full grid items-center justify-start">
+      <div class="lg:w-full grid items-center justify-start w-fit">
         <Dropdown title={title} />
       </div>
     </MenuItems>
