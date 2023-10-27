@@ -61,7 +61,19 @@ export const addNewTab = (newTab: HeaderData) => {
   try {
     console.log(newTab, ":::Data to add to new Tab");
 
-    // Call market API to get the pair, exchange and price
+    // Check if tab is already in list
+    if ($tabs.get().some((value) => value.coinId === newTab.coinId)) {
+      $tabs.set(
+        $tabs
+          .get()
+          .map((value) =>
+            value.coinId === newTab.coinId
+              ? { ...newTab, selected: true }
+              : { ...value, selected: false }
+          )
+      );
+      return;
+    }
 
     $tabs.set([
       ...$tabs.get().map((value) => ({ ...value, selected: false })),
