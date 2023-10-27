@@ -108,16 +108,20 @@ export const getMarketData = async ({
 }: {
   coin: string;
 }): Promise<HeaderData> => {
-  const API_URL = `https://api.coinstats.app/public/v1/markets?coinId=${coin}`;
+  // const API_URL = `${
+  //   import.meta.env.PUBLIC_COIN_STATS_URL
+  // }/markets?coinId=${coin}`;
 
   try {
-    const result = await fetch(API_URL);
-    const json = await result.json();
-    console.log(coin, ":::Coin market data");
+    // const result = await fetch(API_URL, {
+    //   headers: { "X-API-KEY": import.meta.env.PUBLIC_COIN_STATS_API_KEY },
+    // });
+    // const json = await result.json();
+    // console.log(coin, ":::Coin market data");
 
     const tokenData = await getTokenData({ coin });
 
-    if (!json && !tokenData) {
+    if (!tokenData) {
       return {
         pair: "Loading...",
         exchange: "Loading...",
@@ -129,16 +133,16 @@ export const getMarketData = async ({
     }
 
     return {
-      pair: json[0]["pair"],
-      exchange: json[0]["exchange"],
-      price: json[0]["price"],
+      pair: `${tokenData["symbol"]}/USD`,
+      exchange: "BINANCE",
+      price: tokenData["price"],
       changeIn1h: tokenData["priceChange1h"],
       coinId: tokenData["id"],
-      selected: false,
+      selected: true,
     };
   } catch (e: any) {
     window.alert(e.message ?? e.toString());
-    console.log(e.message ?? e.toString());
+    console.log(e.message ?? e.toString(), "**** marketData_ERROR");
     return {
       pair: "Loading...",
       exchange: "Loading...",
@@ -167,13 +171,15 @@ export const getTokenData = async ({
 }: {
   coin: string;
 }): Promise<Array<any>> => {
-  const API_URL = `https://api.coinstats.app/public/v1/coins/${coin}`;
+  const API_URL = `${import.meta.env.PUBLIC_COIN_STATS_URL}/coins/${coin}`;
 
   try {
-    const result = await fetch(API_URL);
+    const result = await fetch(API_URL, {
+      headers: { "X-API-KEY": import.meta.env.PUBLIC_COIN_STATS_API_KEY },
+    });
     const json = await result.json();
 
-    return json["coin"];
+    return json;
   } catch (e: any) {
     window.alert(e.message ?? e.toString());
     console.log(e.message ?? e.toString(), ":::getToken_error");

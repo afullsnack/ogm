@@ -23,11 +23,11 @@ const AssetSearch: FC = () => {
     <>
       <input
         type="text"
-        className="bg-slate-800 peer border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium uppercase absolute top-1 left-40 right-40 md:left-20 md:right-20"
+        className="bg-slate-800 peer border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium uppercase absolute top-1 left-5 right-5 md:left-20 md:right-20"
         placeholder="BTC/ETH"
         onChange={(e: any) => setSearch(e.target.value)}
       />
-      <div className="py-4 rounded-lg overflow-y-scroll h-full bg-slate-700/90 mt-1 absolute top-14 left-40 right-40 md:left-20 md:right-20">
+      <div className="py-4 rounded-lg overflow-y-scroll h-full bg-slate-700/90 mt-1 absolute top-14 left-5 right-5 md:left-20 md:right-20">
         <ul className="w-full h-auto list-none">
           {dashboardData &&
             !!dashboardData.length &&
