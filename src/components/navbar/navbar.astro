@@ -44,29 +44,31 @@ const menuitems = [
     <Astronav>
       <div class="flex w-full lg:w-auto items-center justify-between">
         <a href="/" class="text-lg"
-          ><span class="font-bold text-slate-800">Opti-Growth</span><span
-            class="text-slate-500"> Markets</span
+          ><span class="font-bold text-slate-800">OptGrowth</span><span
+            class="text-slate-500">
+            Markets</span
           >
         </a>
         <div class="block lg:hidden" id="menu-btn">
           <MenuIcon class="w-4 h-4 text-gray-800" />
         </div>
       </div>
-      <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0 menu-toggle">
+      <MenuItems
+        class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0 menu-toggle">
         <ul class="flex flex-col lg:flex-row lg:gap-3">
           {
             menuitems.map((item, index) => (
               // <>
-                // {item.children && (
-                //   <Dropdown
-                //     title={item.title}
-                //     children={item.children}
-                //     lastItem={index === menuitems.length - 1}
-                //   />
-                // )}
-                
-                // </>
-                <>
+              // {item.children && (
+              //   <Dropdown
+              //     title={item.title}
+              //     children={item.children}
+              //     lastItem={index === menuitems.length - 1}
+              //   />
+              // )}
+
+              // </>
+              <>
                 {!item.children && (
                   <li>
                     <a
@@ -76,32 +78,40 @@ const menuitems = [
                     </a>
                   </li>
                 )}
-                </>
+              </>
             ))
           }
         </ul>
         <div class="lg:hidden flex items-center mt-3 gap-4">
           <Link href="/user" size="md" block>CREATE ACCOUNT</Link>
-          <Link href="/user" style="muted" block size="md"><Icon name="bi:person-circle" class="w-4 h-4" /></Link>
+          <Link href="/user" style="muted" block size="md">
+            <Icon name="bi:person-circle" class="w-4 h-4" />
+          </Link>
         </div>
       </MenuItems>
     </Astronav>
     <div>
       <div class="hidden lg:flex items-center gap-4">
         <Link href="/user" size="md" block class="text-xs">CREATE ACCOUNT</Link>
-        <Link href="/user" style="muted" block class="w-10 h-10 grid items-center justify-center" size="md"><Icon name="bi:person-circle" class="w-4 h-4" /></Link>
+        <Link
+          href="/user"
+          style="muted"
+          block
+          class="w-10 h-10 grid items-center justify-center"
+          size="md">
+          <Icon name="bi:person-circle" class="w-4 h-4" />
+        </Link>
       </div>
     </div>
   </header>
 </Container>
 
-
 <script>
   const menuButtton = document.getElementById("menu-btn");
 
-  menuButtton?.addEventListener('click', () => {
-    [...document.querySelectorAll('.menu-toggle')].forEach(element => {
-      element.classList.toggle('hidden');
+  menuButtton?.addEventListener("click", () => {
+    [...document.querySelectorAll(".menu-toggle")].forEach((element) => {
+      element.classList.toggle("hidden");
     });
-  })
+  });
 </script>

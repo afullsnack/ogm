@@ -9,7 +9,7 @@ const balance = 10000;
 const liveBalance = 0;
 ---
 
-<div class="relative max-w-max lg:w-[400px] w-fit z-50">
+<div class="relative max-w-max lg:w-[400px] w-full z-50">
   <DropdownContainer class="group">
     <button
       class="grid items-start justify-items-start justify-center gap-1 text-gray-200 hover:text-gray-400">
@@ -37,10 +37,10 @@ const liveBalance = 0;
         }</span
       >
     </button>
-    <DropdownItems class="w-auto z-50">
+    <DropdownItems class="z-50 min-w-max">
       <div
         class:list={[
-          "absolute w-fit lg:w-[450px] z-50",
+          "absolute w-[calc(w-screen - 30px)] min-w-max lg:w-[450px] z-50",
           "lg:right-0 origin-top-right right-1",
         ]}>
         <div
