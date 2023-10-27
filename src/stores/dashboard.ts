@@ -53,7 +53,7 @@ export const fetchDashboardData = async ({
     $dashboardData.set(json["result"]);
   } catch (e: any) {
     console.log(e.message ?? e.toString(), ":::fetchDashboardData_error");
-    window.alert(e.message ?? e.toString());
+    // window.alert(e.message ?? e.toString());
   }
 };
 
