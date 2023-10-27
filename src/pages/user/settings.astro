@@ -18,7 +18,7 @@ if (!isLoggedIn()) {
 ---
 
 <DashboardLayout>
-  <div class="bg-slate-900 p-4 max-w-4xl my-1 mx-auto">
+  <div class="bg-slate-900 p-4 lg:max-w-4xl w-full my-1 mx-auto">
     <Sectionhead align="center">
       <h1 class="text-3xl text-white font-bold" slot="title">{"Profile"}</h1>
       <Fragment slot="desc">{"Users profile settings"}</Fragment>
@@ -34,7 +34,7 @@ if (!isLoggedIn()) {
     </Sectionhead>
     <div
       class="w-full grid gap-3 relative items-start justify-center mb-12 mt-5">
-      <div class="my-8 flex items-center justify-between gap-2">
+      <div class="my-8 lg:flex grid items-center justify-between gap-2">
         <a
           href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en"
           target="_blank"
@@ -74,7 +74,7 @@ if (!isLoggedIn()) {
         Add withdrawal addresses or bank accounts
       </Fragment>
     </Sectionhead>
-    <div class="flex items-center justify-center gap-2 mt-2 mb-5">
+    <div class="lg:flex grid items-center justify-center gap-2 mt-2 mb-5">
       <div class="px-2 py-1 bg-white rounded-sm hover:cursor-pointer">
         <div
           class="w-40 h-16 bg-white bg-no-repeat bg-contain bg-center"

@@ -44,13 +44,13 @@ export const fetchDashboardData = async ({
   }/coins?page=${page}&limit=${limit}`;
 
   try {
-    // const result = await fetch(ASSET_LIST_DATA_URL, {
-    //   headers: {
-    //     "X-API-KEY": import.meta.env.PUBLIC_COIN_STATS_API_KEY,
-    //   },
-    // });
-    // const json = await result.json();
-    // $dashboardData.set(json["result"]);
+    const result = await fetch(ASSET_LIST_DATA_URL, {
+      headers: {
+        "X-API-KEY": import.meta.env.PUBLIC_COIN_STATS_API_KEY,
+      },
+    });
+    const json = await result.json();
+    $dashboardData.set(json["result"]);
   } catch (e: any) {
     console.log(e.message ?? e.toString(), ":::fetchDashboardData_error");
     window.alert(e.message ?? e.toString());

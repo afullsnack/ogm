@@ -15,7 +15,7 @@ const UserSettingsDetails: FC = () => {
   }, []);
 
   return (
-    <div className="w-[400px] grid grid-cols-2 gap-4 text-white">
+    <div className="w-[400px] grid lg:grid-cols-2 grid-cols-1 gap-4 text-white">
       <label className="grid items-start">
         <span className="capitalize lg:text-xs text-sm mb-1">YOUR NAME</span>
         <input
@@ -72,7 +72,7 @@ const UserSettingsDetails: FC = () => {
           placeholder="password"
         />
       </label>
-      <label className="grid items-start col-span-2">
+      <label className="grid items-start lg:col-span-2 col-span-1">
         <span className="capitalize lg:text-xs text-sm mb-1">REFERAL LINK</span>
         <input
           type="text"
