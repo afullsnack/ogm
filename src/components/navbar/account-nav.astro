@@ -4,11 +4,11 @@ import DepositModal from "@components/ui/depositModal.astro";
 import Icon from "astro-icon";
 import { Astronav, MenuItems } from "astro-navbar";
 import Dropdown from "./dropdown.astro";
-const { title, children } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <div
-  class="lg:w-full w-fit flex items-center lg:justify-end justify-start px-5">
+  class="lg:w-full w-fit flex items-center lg:justify-end justify-start px-5 gap-4">
   <!-- FLow for live button click bring up deposit modal with payment addresses and networks -->
   <DepositModal id="depositModal" open="Open modal">
     <main
@@ -25,7 +25,7 @@ const { title, children } = Astro.props;
           />
           <input
             type="text"
-            class="bg-slate-800 w-[300px] border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium"
+            class="bg-slate-800 w-[300px] border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium copy-text"
             readonly
             placeholder="Address"
             value="3KSFShFwm27bGPhfXttPyUGL4kZEmD7E8G"
@@ -50,7 +50,7 @@ const { title, children } = Astro.props;
           />
           <input
             type="text"
-            class="bg-slate-800 w-[300px] border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium"
+            class="bg-slate-800 w-[300px] border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium copy-text"
             readonly
             placeholder="Address"
             value="0x46c4fB880819F6a77433eF996d317Cc9ABc15391"
@@ -75,7 +75,7 @@ const { title, children } = Astro.props;
           />
           <input
             type="text"
-            class="bg-slate-800 w-[300px] border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium"
+            class="bg-slate-800 w-[300px] border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium copy-text"
             readonly
             placeholder="Address"
             value="0x46c4fB880819F6a77433eF996d317Cc9ABc15391"
@@ -98,9 +98,31 @@ const { title, children } = Astro.props;
   </DepositModal>
   <Astronav>
     <MenuItems>
-      <div class="lg:w-full grid items-center justify-start w-fit">
+      <div class="lg:w-full grid items-center justify-start w-fit z-[100]">
         <Dropdown title={title} />
       </div>
     </MenuItems>
   </Astronav>
 </div>
+
+<script>
+  // Add click event listener to the copy button
+  const copyText = document.querySelectorAll("copy-text");
+  [...copyText].forEach((element, index) => {
+    element.addEventListener("click", () => {
+      //@ts-ignore
+      element?.select();
+
+      try {
+        // Copy the selected text to the clipboard
+        document.execCommand("copy");
+        alert("Text copied to clipboard");
+      } catch (err) {
+        console.error("Unable to copy to clipboard: ", err);
+      }
+
+      // Deselect the text
+      window.getSelection().removeAllRanges();
+    });
+  });
+</script>

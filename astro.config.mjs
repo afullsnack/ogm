@@ -8,7 +8,10 @@ import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://astroship.web3templates.com",
+  site:
+    import.meta.env.MODE === "production"
+      ? "https://optgrowthmarkets.com"
+      : "http://localhost:4321",
   integrations: [
     tailwind({
       applyBaseStyles: false,

@@ -75,7 +75,7 @@ export default function TradingViewWidget() {
   }, [headerTabs]);
 
   return (
-    <div className="tradingview-widget-container h-full -z-50">
+    <div className="tradingview-widget-container h-full -z-[1]">
       <div id="tradingview_f9942" className="w-full h-full -z-50" />
       {/* <div className="tradingview-widget-copyright">
         <a
