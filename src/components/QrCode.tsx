@@ -1,4 +1,4 @@
-import QRCode from "qrcode.react";
+import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useState } from "react";
 import speakeasy from "speakeasy";
 
@@ -19,7 +19,7 @@ function QRCodeComp() {
 
   return (
     <div className="p-2 bg-white flex items-center justify-center">
-      <QRCode value={secret} size={180} renderAs="svg" />
+      <QRCodeSVG value={secret} size={180} />
     </div>
   );
 }
