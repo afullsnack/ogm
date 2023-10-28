@@ -45,16 +45,45 @@ export const registerNewUser = async ({
     throw new Error("Passwords do not match");
   }
 
-  const result = await pb.collection("users").create({
+  await pb.admins.authWithPassword(
+    import.meta.env.PB_ADMIN_EMAIL,
+    import.meta.env.PB_ADMIN_PASSWORD
+  );
+
+  const userResult = await pb.collection("users").create({
     name,
     email,
     password,
     passwordConfirm: confirmPassword,
   });
 
-  console.log(result, ":::New user created");
+  const testBalanceResult = await pb.collection("testBalance").create({
+    btcBalance: 10000,
+    ethBalance: 250,
+    usdtBalance: 1200,
+    user: userResult.id,
+  });
+  const liveBalanceResult = await pb.collection("liveBalance").create({
+    btcBalance: 0,
+    ethBalance: 0,
+    usdtBalance: 0,
+    user: userResult.id,
+  });
 
-  return result;
+  const updateUser = await pb.collection("user").update(userResult.id, {
+    testBalances: testBalanceResult.id,
+    liveBalances: liveBalanceResult.id,
+  });
+
+  console.log(
+    userResult,
+    testBalanceResult,
+    liveBalanceResult,
+    updateUser,
+    ":::New user created"
+  );
+
+  return userResult;
 };
 
 export const logout = () => {

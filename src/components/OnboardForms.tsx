@@ -143,7 +143,7 @@ const OnboardForms: React.FC = () => {
               } catch (e: any) {
                 setIsRegisterLoading(false);
                 window.alert(e.message ?? e.toString());
-                throw new Error(e.message ?? e.toString());
+                // throw new Error(e.message ?? e.toString());
               }
             }}>
             {isRegisterLoading ? "LOADING..." : "REGISTER"}
