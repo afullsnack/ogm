@@ -28,7 +28,7 @@ const AddressDisplay = ({ value }: { value: string }) => {
   }, []);
 
   return (
-    <div className="bg-slate-800 px-2 rounded flex gap-2 border-gray-400/50">
+    <div className="bg-slate-800 px-4 rounded flex gap-2 border-gray-400/50 justify-between">
       <input
         type="text"
         value={inputValue}
