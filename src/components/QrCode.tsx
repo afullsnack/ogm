@@ -3,7 +3,14 @@ import { FC } from "react";
 import speakeasy from "speakeasy";
 
 const QRCodeComp: FC = () => {
-  const generatedSecret = () => speakeasy.generateSecret({ length: 20 });
+  const generatedSecret = () =>
+    speakeasy
+      .generateSecret({ length: 20 })
+      .then((value) => value)
+      .catch((err) => {
+        console.log(err, "SPEAKEASY ERROR");
+        return "";
+      });
 
   // TODO: also save in the db as the users auth
 
