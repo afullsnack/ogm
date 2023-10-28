@@ -4,6 +4,7 @@ import DepositModal from "@components/ui/depositModal.astro";
 import Icon from "astro-icon";
 import { Astronav, MenuItems } from "astro-navbar";
 import Dropdown from "./dropdown.astro";
+import AddressDisplay from "./AddressDisplay";
 const { title } = Astro.props;
 ---
 
@@ -23,11 +24,15 @@ const { title } = Astro.props;
             address={"3KSFShFwm27bGPhfXttPyUGL4kZEmD7E8G"}
             client:only
           />
-          <input
+          <!-- <input
             type="text"
             class="bg-slate-800 w-[300px] border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium copy-text"
             readonly
             placeholder="Address"
+            value=""
+          /> -->
+          <AddressDisplay
+            client:only
             value="3KSFShFwm27bGPhfXttPyUGL4kZEmD7E8G"
           />
           <input
@@ -48,11 +53,15 @@ const { title } = Astro.props;
             address={"0x46c4fB880819F6a77433eF996d317Cc9ABc15391"}
             client:only
           />
-          <input
+          <!-- <input
             type="text"
             class="bg-slate-800 w-[300px] border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium copy-text"
             readonly
             placeholder="Address"
+            value=""
+          /> -->
+          <AddressDisplay
+            client:only
             value="0x46c4fB880819F6a77433eF996d317Cc9ABc15391"
           />
           <input
@@ -67,17 +76,21 @@ const { title } = Astro.props;
         </label>
         <label class="grid items-start mt-10 gap-2">
           <span class="capitalize lg:text-lg font-bold text-xl mb-1 text-white"
-            >USDT(ERC20) DEPOSIT</span
+            >USDT(TRC20) DEPOSIT</span
           >
           <DepositQr
             address={"0x46c4fB880819F6a77433eF996d317Cc9ABc15391"}
             client:only
           />
-          <input
+          <!-- <input
             type="text"
             class="bg-slate-800 w-[300px] border-gray-400/50 rounded-md caret-current border px-2 py-3 text-white outline-none font-medium copy-text"
             readonly
             placeholder="Address"
+            value=""
+          /> -->
+          <AddressDisplay
+            client:only
             value="0x46c4fB880819F6a77433eF996d317Cc9ABc15391"
           />
           <input

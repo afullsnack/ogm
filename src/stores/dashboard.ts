@@ -86,6 +86,18 @@ export const addNewTab = (newTab: HeaderData) => {
 };
 
 export const getAllTabs = () => {
+  if (!$tabs.get().length) {
+    $tabs.set([
+      {
+        pair: `BTC/USDT`,
+        exchange: "OKEX",
+        price: 33000,
+        changeIn1h: 1.3,
+        coinId: "bitcoin",
+        selected: true,
+      },
+    ]);
+  }
   return $tabs.get();
 };
 
