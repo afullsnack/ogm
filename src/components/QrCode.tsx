@@ -9,7 +9,7 @@ const QRCodeComp: FC = () => {
 
   return (
     <div className="p-2 bg-white flex items-center justify-center">
-      <QRCode value={generatedSecret()} size={180} />
+      <QRCode value={generatedSecret()} size={180} renderAs="svg" />
     </div>
   );
 };
