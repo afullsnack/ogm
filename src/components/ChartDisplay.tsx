@@ -65,7 +65,7 @@ export default function TradingViewWidget() {
     setHeaderTabs(getAllTabs());
     const selected = getAllTabs().find((val) => val.selected);
     const exchange = selected.exchange.toLocaleLowerCase().includes("binance")
-      ? "BINANCE"
+      ? "OKEX"
       : selected.exchange.toUpperCase();
     const assetPair = selected.pair.replace("/", "");
 

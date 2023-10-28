@@ -147,8 +147,8 @@ export const getMarketData = async ({
     }
 
     return {
-      pair: `${tokenData["symbol"]}/USD`,
-      exchange: "BINANCE",
+      pair: `${tokenData["symbol"]}/USDT`,
+      exchange: "OKEX",
       price: tokenData["price"],
       changeIn1h: tokenData["priceChange1h"],
       coinId: tokenData["id"],

@@ -13,7 +13,12 @@ const AssetSearch: FC = () => {
 
   useEffect(() => {
     async function waitForFetch() {
-      await fetchDashboardData({ page: 1, limit: 100 });
+      await fetchDashboardData({ page: 1, limit: 50 });
+    }
+
+    if (!!dashboardData.length) {
+      console.log(dashboardData, ":::There is data in dashboard");
+      return;
     }
 
     waitForFetch();
