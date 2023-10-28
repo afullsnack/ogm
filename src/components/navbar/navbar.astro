@@ -50,11 +50,11 @@ const menuitems = [
           >
         </a>
         <div class="block lg:hidden" id="menu-btn">
-          <MenuIcon class="w-4 h-4 text-gray-400" />
+          <MenuIcon class="w-6 h-6 font-bold text-gray-400" />
         </div>
       </div>
       <MenuItems
-        class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0 menu-toggle fixed top-10 right-0 left-0 p-10 bg-slate-900 transition-opacity opacity-90">
+        class="hidden lg:flex lg:mt-0 menu-toggle lg:static lg:p-2 fixed top-10 right-0 left-0 p-10 bg-slate-900 transition-opacity opacity-90">
         <ul class="flex flex-col lg:flex-row lg:gap-3">
           {
             menuitems.map((item, index) => (
