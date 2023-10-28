@@ -97,6 +97,17 @@ export const getAllTabs = () => {
         selected: true,
       },
     ]);
+  } else {
+    // const filtered = $tabs
+    //   .get()
+    //   .filter(
+    //     (value) =>
+    //       !value.pair.includes("undefined") ||
+    //       !value.exchange.includes("undefined")
+    //   );
+    // if (!!filtered.length) {
+    //   $tabs.set(filtered);
+    // }
   }
   return $tabs.get();
 };
