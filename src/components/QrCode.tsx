@@ -1,12 +1,12 @@
 import QRCode from "qrcode.react";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import speakeasy from "speakeasy";
 
-const QRCodeComp: FC = () => {
-  const [secret, setSecret] = useState("");
+function QRCodeComp() {
+  const [secret, setSecret] = useState("secretestringdude");
   useEffect(() => {
     try {
-      const token = generatedSecret();
+      const token = speakeasy.generateSecret({ length: 20 });
       if (token) {
         setSecret(token);
       }
@@ -14,9 +14,6 @@ const QRCodeComp: FC = () => {
       console.log(e.message ?? e.toString());
     }
   }, []);
-  const generatedSecret = (): string => {
-    return speakeasy.generateSecret({ length: 20 });
-  };
 
   // TODO: also save in the db as the users auth
 
@@ -25,6 +22,6 @@ const QRCodeComp: FC = () => {
       <QRCode value={secret} size={180} renderAs="svg" />
     </div>
   );
-};
+}
 
 export default QRCodeComp;
