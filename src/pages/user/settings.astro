@@ -4,10 +4,10 @@ import Sectionhead from "@components/sectionhead.astro";
 import DashboardLayout from "@layouts/DashboardLayout.astro";
 // Settings page
 import WithdrawalCard from "@components/WithdrawalCard";
-import { isLoggedIn, logout } from "services/UserService";
-import { $withdrawals } from "../../stores/settings";
 import LogoutButton from "@components/ui/LogoutButton";
 import UserSettingsDetails from "@components/ui/UserSettingsDetails";
+import { isLoggedIn } from "services/UserService";
+import { $withdrawals } from "../../stores/settings";
 
 // addPaypalEmail({ email: "text@mail.com", type: 'paypal' });
 // $withdrawals.set([{ email: "text@mail.com", type: 'paypal' }]);
@@ -18,95 +18,96 @@ if (!isLoggedIn()) {
 ---
 
 <DashboardLayout>
-  <div class="bg-slate-900 p-4 lg:max-w-4xl w-full my-1 mx-auto">
-    <Sectionhead align="center">
-      <h1 class="text-3xl text-white font-bold" slot="title">{"Profile"}</h1>
-      <Fragment slot="desc">{"Users profile settings"}</Fragment>
-    </Sectionhead>
-    <div class="w-full grid gap-3 relative items-start justify-center mt-5">
-      <UserSettingsDetails client:load />
-    </div>
-    <Sectionhead align="center">
-      <h1 class="text-3xl text-white font-bold" slot="title">{"Security"}</h1>
-      <Fragment slot="desc">
-        Secure your account with <b class="text-white">Google Authenticator</b>
-      </Fragment>
-    </Sectionhead>
-    <div
-      class="w-full grid gap-3 relative items-start justify-center mb-12 mt-5">
-      <div class="my-8 lg:flex grid items-center justify-between gap-2">
-        <a
-          href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en"
-          target="_blank"
-          class="px-3 py-2 bg-black text-white hover:bg-black/70 hover:text-blue-600 flex-1 text-center"
-          >Download on Android</a
-        >
-        <a
-          href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8"
-          target="_blank"
-          class="px-3 py-2 bg-black text-white hover:bg-black/70 hover:text-blue-600 flex-1 text-center"
-          >Download on iOS</a
-        >
-      </div>
-      <hr class="my-2 text-gray-400" />
-      <div class="w-[400px] grid gap-4 text-white items-center justify-center">
-        <span class="text-center font-normal text-sm w-[280px]"
-          >Scan the QRcode with the <b>Google Authenticator</b> app, enter the
-          code that appears and validate</span
-        >
-        <QRCodeComp />
-        <input
-          type="password"
-          placeholder="*****"
-          class="w-full mx-auto h-10 bg-slate-800 border-gray-400/50 rounded-md caret-current border flex items-center justify-center px-2 text-xl font-medium text-center tracking-[.8em] text-white outline-none"
-        />
-        <button
-          class="bg-blue-500 text-white hover:bg-blue-400 px-2 py-1 w-full h-10 active:bg-blue-600 tracking-wide mx-auto"
-          >VALIDATE</button
-        >
-      </div>
-    </div>
-    <Sectionhead align="center">
-      <h1 class="text-3xl text-white font-bold" slot="title">
-        {"Withdraw / Wallets"}
-      </h1>
-      <Fragment slot="desc" class:list={"w-[280px]"}>
-        Add withdrawal addresses or bank accounts
-      </Fragment>
-    </Sectionhead>
-    <div class="lg:flex grid items-center justify-center gap-2 mt-2 mb-5">
-      <div class="px-2 py-1 bg-white rounded-sm hover:cursor-pointer">
-        <div
-          class="w-40 h-16 bg-white bg-no-repeat bg-contain bg-center"
-          style="background-image: url(/paypal.svg);">
-        </div>
-      </div>
-      <div class="px-2 py-1 bg-white rounded-sm hover:cursor-pointer">
-        <div
-          class="w-40 h-16 bg-white bg-no-repeat bg-contain bg-center"
-          style="background-image: url(/banktransfert.svg);">
-        </div>
-      </div>
-      <div class="px-2 py-1 bg-white rounded-sm hover:cursor-pointer">
-        <div
-          class="w-40 h-16 bg-white bg-no-repeat bg-contain bg-center"
-          style="background-image: url(/cryptocurrencies.svg);">
-        </div>
-      </div>
-    </div>
-    <div>
-      {$withdrawals.get().map((item, index) => <WithdrawalCard item={item} />)}
-    </div>
-    <Sectionhead align="center">
-      <h1 class="text-3xl text-white font-bold" slot="title">{"Logout"}</h1>
-      <Fragment slot="desc">Logout of your account</Fragment>
-    </Sectionhead>
-    <div class="flex items-center justify-center gap-2 mt-2 mb-5">
-      <LogoutButton client:load />
+  <!-- <div class="bg-slate-900 p-4 lg:max-w-4xl"> -->
+  <Sectionhead>
+    <h1 class="text-3xl text-white font-bold" slot="title">{"Profile"}</h1>
+    <span class="text-sm font-normal text-white" slot="desc"
+      >{"Users profile settings"}</span
+    >
+  </Sectionhead>
+  <div class="w-full grid gap-3 items-center justify-center mt-5 px-4">
+    <UserSettingsDetails client:only />
+  </div>
+  <Sectionhead>
+    <h1 class="text-3xl text-white font-bold" slot="title">{"Security"}</h1>
+    <span class="text-sm font-normal text-white" slot="desc">
+      Secure your account with <b class="text-white">Google Authenticator</b>
+    </span>
+  </Sectionhead>
+  <div class="w-full grid gap-3 items-center justify-center mt-10 px-4">
+    <a
+      href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en"
+      target="_blank"
+      class="px-3 py-2 bg-black text-white hover:bg-black/70 hover:text-blue-600 flex-1 text-center"
+      >Download on Android</a
+    >
+    <a
+      href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8"
+      target="_blank"
+      class="px-3 py-2 bg-black text-white hover:bg-black/70 hover:text-blue-600 flex-1 text-center"
+      >Download on iOS</a
+    >
+
+    <!-- <hr class="text-gray-400 w-full" /> -->
+    <div class="grid gap-4 text-white items-center justify-center">
+      <span class="text-center font-normal text-sm"
+        >Scan the QRcode with the <b>Google Authenticator</b> app, enter the
+        code that appears and validate</span
+      >
+      <QRCodeComp />
+      <input
+        type="password"
+        placeholder="*****"
+        class="w-full mx-auto h-10 bg-slate-800 border-gray-400/50 rounded-md caret-current border flex items-center justify-center px-2 text-xl font-medium text-center tracking-[.8em] text-white outline-none"
+      />
+      <button
+        class="bg-blue-500 text-white hover:bg-blue-400 px-2 py-1 w-full h-10 active:bg-blue-600 tracking-wide mx-auto"
+        >VALIDATE</button
+      >
     </div>
   </div>
+  <Sectionhead align="center">
+    <h1 class="text-3xl text-white font-bold" slot="title">
+      {"Withdraw / Wallets"}
+    </h1>
+    <span
+      class="text-sm font-normal text-white"
+      slot="desc"
+      class:list={"w-[280px]"}>
+      Add withdrawal addresses or bank accounts
+    </span>
+  </Sectionhead>
+  <div class="lg:flex grid items-center justify-center gap-2 mt-2 mb-5">
+    <div class="px-2 py-1 bg-white rounded-sm hover:cursor-pointer">
+      <div
+        class="w-40 h-16 bg-white bg-no-repeat bg-contain bg-center"
+        style="background-image: url(/paypal.svg);">
+      </div>
+    </div>
+    <div class="px-2 py-1 bg-white rounded-sm hover:cursor-pointer">
+      <div
+        class="w-40 h-16 bg-white bg-no-repeat bg-contain bg-center"
+        style="background-image: url(/banktransfert.svg);">
+      </div>
+    </div>
+    <div class="px-2 py-1 bg-white rounded-sm hover:cursor-pointer">
+      <div
+        class="w-40 h-16 bg-white bg-no-repeat bg-contain bg-center"
+        style="background-image: url(/cryptocurrencies.svg);">
+      </div>
+    </div>
+  </div>
+  <div>
+    {$withdrawals.get().map((item, index) => <WithdrawalCard item={item} />)}
+  </div>
+  <Sectionhead align="center">
+    <h1 class="text-3xl text-white font-bold" slot="title">{"Logout"}</h1>
+    <span class="text-sm font-normal text-white" slot="desc"
+      >Logout of your account</span
+    >
+  </Sectionhead>
+  <div class="flex items-center justify-center gap-2 mt-2 mb-5 px-4">
+    <LogoutButton client:load />
+  </div>
+  <!-- </div> -->
 </DashboardLayout>
-
-<script>
-  console.log(window.localStorage.getItem("pocketbase_auth"), ":::Auth model");
-</script>
