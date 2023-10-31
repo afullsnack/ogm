@@ -15,13 +15,3 @@ if (!isLoggedIn()) {
     <TradingViewWidget client:load />
   </div>
 </DashboardLayout>
-
-<script>
-  window.addEventListener("deviceorientation", (ev) => {
-    if (window.innerHeight > window.innerWidth) {
-      alert("Please use Landscape!");
-    }
-    console.log(ev, "::: Orientation events", window.orientation);
-    window.alert("Orientation changed");
-  });
-</script>
