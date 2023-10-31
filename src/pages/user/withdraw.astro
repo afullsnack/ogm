@@ -1,0 +1,20 @@
+---
+import Sectionhead from "@components/sectionhead.astro";
+import DashboardLayout from "@layouts/DashboardLayout.astro";
+const account = Astro.url.searchParams.get("account")! || "demo";
+console.log(account, "::: Account type");
+---
+
+<DashboardLayout>
+  <Sectionhead>
+    <h1 slot="title" class="text-lg font-semibold text-white">Withdraw</h1>
+    {
+      account === "demo" && (
+        <span slot="desc" class="text-sm font-normal text-white">
+          Cannot withdraw from a <b class="text-orange-600">Demo Account</b>,
+          please make a deposit to acitvate withdrawal
+        </span>
+      )
+    }
+  </Sectionhead>
+</DashboardLayout>

@@ -39,6 +39,40 @@ const TotalBalance = ({ accountType }: { accountType: "demo" | "live" }) => {
       }
     }
   }, []);
+  useEffect(() => {
+    getLatestBalanceData();
+
+    async function getLatestBalanceData() {
+      if (typeof window !== "undefined") {
+        const testBalance = await getTestBalances(
+          JSON.parse(window.localStorage.getItem("pocketbase_auth"))["model"][
+            "testBalances"
+          ]
+        );
+        const liveBalance = await getLiveBalances(
+          JSON.parse(window.localStorage.getItem("pocketbase_auth"))["model"][
+            "liveBalances"
+          ]
+        );
+
+        setTotalTestBalance(
+          testBalance["btcBalance"] +
+            testBalance["ethBalance"] +
+            testBalance["usdtBalance"]
+        );
+        setTotalLiveBalance(
+          liveBalance["btcBalance"] +
+            liveBalance["ethBalance"] +
+            liveBalance["usdtBalance"]
+        );
+        console.log(
+          totalLiveBalance,
+          totalTestBalance,
+          "::: LIVE AND TEST BALANCES"
+        );
+      }
+    }
+  }, [accountType]);
 
   return (
     <span className="text-xl line-clamp-2 font-bold">
