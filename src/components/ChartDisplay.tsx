@@ -65,7 +65,19 @@ export default function TradingViewWidget() {
     setHeaderTabs(getAllTabs());
     const selected = getAllTabs().find((val) => val.selected);
     const exchange = selected.exchange.toLocaleLowerCase().includes("binance")
-      ? "OKEX"
+      ? "BINANCE"
+      : selected.exchange.toUpperCase();
+    const assetPair = selected.pair.replace("/", "");
+
+    console.log(tabs, "::: useStore_Tabs");
+    console.log(exchange, assetPair, "::: Asset and pair");
+    setChartToken((_) => `${exchange}:${assetPair}`);
+  }, []);
+  useEffect(() => {
+    setHeaderTabs(getAllTabs());
+    const selected = getAllTabs().find((val) => val.selected);
+    const exchange = selected.exchange.toLocaleLowerCase().includes("binance")
+      ? "BINANCE"
       : selected.exchange.toUpperCase();
     const assetPair = selected.pair.replace("/", "");
 
