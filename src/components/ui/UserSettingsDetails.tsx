@@ -2,13 +2,14 @@ import { FC, useEffect, useState } from "react";
 
 const UserSettingsDetails: FC = () => {
   const [user, setUser] = useState({
-    name: "John Doe",
-    email: "miraclef60@gmail.com",
+    name: "",
+    email: "",
   });
 
   useEffect(() => {
     const userModel = window.localStorage.getItem("pocketbase_auth");
     if (userModel) {
+      console.log("Parsed user");
       setUser(JSON.parse(userModel)["model"]);
     }
   }, []);
@@ -20,7 +21,7 @@ const UserSettingsDetails: FC = () => {
         <input
           type="text"
           className="bg-slate-800 border-gray-400/50 rounded-md caret-current border px-2 py-1 text-white outline-none font-medium"
-          defaultValue={user["name"]}
+          defaultValue={user["name"] ?? ""}
           placeholder="John Doe"
         />
       </label>
@@ -29,7 +30,7 @@ const UserSettingsDetails: FC = () => {
         <input
           type="email"
           className="bg-slate-800 border-gray-400/50 rounded-md caret-current border px-2 py-1 text-white outline-none font-medium"
-          defaultValue={user["email"]}
+          defaultValue={user["email"] ?? ""}
           placeholder="john@doe.xyz"
         />
       </label>

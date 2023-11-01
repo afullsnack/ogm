@@ -18,7 +18,7 @@ import TabsList from "./TabsLIst";
       <main
         slot="main"
         class="w-full grid items-start justify-items-start justify-center min-w-fit overflow-hidden h-full relative">
-        <AssetSearch client:only />
+        <AssetSearch client:load />
       </main>
       <button slot="close" class="mx-auto text-center absolute right-0 top-1">
         <Icon name="mdi:window-close" class="h-10 w-10 text-slate-300" />

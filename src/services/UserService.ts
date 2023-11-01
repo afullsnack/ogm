@@ -44,46 +44,55 @@ export const registerNewUser = async ({
     window.alert("Passwords do not match");
     throw new Error("Passwords do not match");
   }
+  try {
+    console.log(
+      import.meta.env.PUBLIC_PB_ADMIN_EMAIL,
+      import.meta.env.PUBLIC_PB_ADMIN_PASSWORD,
+      "Admin creds"
+    );
+    await pb.admins.authWithPassword(
+      import.meta.env.PUBLIC_PB_ADMIN_EMAIL,
+      import.meta.env.PUBLIC_PB_ADMIN_PASSWORD
+    );
 
-  await pb.admins.authWithPassword(
-    import.meta.env.PB_ADMIN_EMAIL,
-    import.meta.env.PB_ADMIN_PASSWORD
-  );
+    const userResult = await pb.collection("users").create({
+      name,
+      email,
+      password,
+      passwordConfirm: confirmPassword,
+    });
 
-  const userResult = await pb.collection("users").create({
-    name,
-    email,
-    password,
-    passwordConfirm: confirmPassword,
-  });
+    const testBalanceResult = await pb.collection("testBalances").create({
+      btcBalance: 10000,
+      ethBalance: 250,
+      usdtBalance: 1200,
+      user: userResult.id,
+    });
+    const liveBalanceResult = await pb.collection("liveBalances").create({
+      btcBalance: 0,
+      ethBalance: 0,
+      usdtBalance: 0,
+      user: userResult.id,
+    });
 
-  const testBalanceResult = await pb.collection("testBalance").create({
-    btcBalance: 10000,
-    ethBalance: 250,
-    usdtBalance: 1200,
-    user: userResult.id,
-  });
-  const liveBalanceResult = await pb.collection("liveBalance").create({
-    btcBalance: 0,
-    ethBalance: 0,
-    usdtBalance: 0,
-    user: userResult.id,
-  });
+    const updateUser = await pb.collection("users").update(userResult.id, {
+      testBalances: testBalanceResult.id,
+      liveBalances: liveBalanceResult.id,
+    });
 
-  const updateUser = await pb.collection("user").update(userResult.id, {
-    testBalances: testBalanceResult.id,
-    liveBalances: liveBalanceResult.id,
-  });
+    console.log(
+      userResult,
+      testBalanceResult,
+      liveBalanceResult,
+      updateUser,
+      ":::New user created"
+    );
 
-  console.log(
-    userResult,
-    testBalanceResult,
-    liveBalanceResult,
-    updateUser,
-    ":::New user created"
-  );
-
-  return userResult;
+    return userResult;
+  } catch (e: any) {
+    console.log(e.message ?? e.toString(), ":::error_onboarding");
+    window.alert(e.message ?? e.toString());
+  }
 };
 
 export const logout = () => {

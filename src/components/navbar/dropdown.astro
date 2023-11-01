@@ -39,7 +39,7 @@ const account = Astro.url.searchParams.get("account")! || "demo";
             d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
         </svg>
       </div>
-      <TotalBalance accountType={account as "demo" | "live"} client:only />
+      <TotalBalance accountType={account as "demo" | "live"} client:load />
     </button>
     <DropdownItems class="z-50 min-w-max">
       <div

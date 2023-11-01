@@ -4,8 +4,8 @@
 interface ImportMetaEnv {
   readonly PUBLIC_COIN_STATS_API_KEY: string;
   readonly PUBLIC_COIN_STATS_URL: string;
-  readonly PB_ADMIN_EMAIL: string;
-  readonly PB_ADMIN_PASSWORD: string;
+  readonly PUBLIC_PB_ADMIN_EMAIL: string;
+  readonly PUBLIC_PB_ADMIN_PASSWORD: string;
   // more env variables...
 }
 

@@ -26,7 +26,7 @@ if (!isLoggedIn()) {
     >
   </Sectionhead>
   <div class="w-full grid gap-3 items-center justify-center mt-5 px-4">
-    <UserSettingsDetails client:only />
+    <UserSettingsDetails client:load />
   </div>
   <Sectionhead>
     <h1 class="text-3xl text-white font-bold" slot="title">{"Security"}</h1>
@@ -54,7 +54,7 @@ if (!isLoggedIn()) {
         >Scan the QRcode with the <b>Google Authenticator</b> app, enter the
         code that appears and validate</span
       >
-      <QRCodeComp client:only />
+      <QRCodeComp client:load />
       <input
         type="password"
         placeholder="*****"
