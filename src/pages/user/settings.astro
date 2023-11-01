@@ -2,6 +2,7 @@
 import Sectionhead from "@components/sectionhead.astro";
 import DashboardLayout from "@layouts/DashboardLayout.astro";
 // Settings page
+import QRCodeComp from "@components/QrCode";
 import WithdrawalCard from "@components/WithdrawalCard";
 import LogoutButton from "@components/ui/LogoutButton";
 import UserSettingsDetails from "@components/ui/UserSettingsDetails";
@@ -53,7 +54,7 @@ if (!isLoggedIn()) {
         >Scan the QRcode with the <b>Google Authenticator</b> app, enter the
         code that appears and validate</span
       >
-      <!-- <QRCodeComp client:only /> -->
+      <QRCodeComp client:only />
       <input
         type="password"
         placeholder="*****"
