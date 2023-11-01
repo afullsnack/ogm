@@ -1,5 +1,4 @@
 ---
-import QRCodeComp from "@components/QrCode";
 import Sectionhead from "@components/sectionhead.astro";
 import DashboardLayout from "@layouts/DashboardLayout.astro";
 // Settings page
@@ -54,7 +53,7 @@ if (!isLoggedIn()) {
         >Scan the QRcode with the <b>Google Authenticator</b> app, enter the
         code that appears and validate</span
       >
-      <QRCodeComp client:load />
+      <!-- <QRCodeComp client:only /> -->
       <input
         type="password"
         placeholder="*****"
