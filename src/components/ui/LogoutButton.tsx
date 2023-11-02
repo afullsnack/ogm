@@ -4,7 +4,7 @@ import { logout } from "services/UserService";
 const LogoutButton: FC = () => {
   return (
     <button
-      class="bg-red-500 text-white hover:bg-red-400 px-2 py-1 w-full h-10 active:bg-red-600 tracking-wide mx-auto"
+      className="bg-red-500 text-white hover:bg-red-400 px-2 py-1 w-full lg:max-w-lg h-10 active:bg-red-600 tracking-wide mx-auto"
       onClick={() => {
         logout();
       }}>

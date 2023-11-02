@@ -80,7 +80,7 @@ const UserSettingsDetails: FC = () => {
           type="text"
           readOnly
           className="bg-slate-800 border-gray-400/50 rounded-md caret-current border px-2 py-1 text-white outline-none font-medium"
-          value={`https://optigrowthmarkets.com/user?ref=${user["id"]}`}
+          value={`https://optgrowthmarkets.com/user?ref=${user["id"]}`}
         />
       </label>
     </div>
