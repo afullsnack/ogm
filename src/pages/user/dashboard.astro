@@ -6,7 +6,7 @@ import { fetchDashboardData } from "../../stores/dashboard";
 
 await fetchDashboardData({ page: 1, limit: 50 });
 if (!isLoggedIn()) {
-  Astro.redirect("/user");
+  return Astro.redirect("/user");
 }
 ---
 

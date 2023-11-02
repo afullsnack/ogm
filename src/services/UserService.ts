@@ -45,11 +45,6 @@ export const registerNewUser = async ({
     throw new Error("Passwords do not match");
   }
   try {
-    console.log(
-      import.meta.env.PUBLIC_PB_ADMIN_EMAIL,
-      import.meta.env.PUBLIC_PB_ADMIN_PASSWORD,
-      "Admin creds"
-    );
     await pb.admins.authWithPassword(
       import.meta.env.PUBLIC_PB_ADMIN_EMAIL,
       import.meta.env.PUBLIC_PB_ADMIN_PASSWORD
@@ -80,18 +75,43 @@ export const registerNewUser = async ({
       liveBalances: liveBalanceResult.id,
     });
 
-    console.log(
-      userResult,
-      testBalanceResult,
-      liveBalanceResult,
-      updateUser,
-      ":::New user created"
-    );
+    const isRequestSent = await requestEmailVerification(email);
+    console.log(isRequestSent, ":::Request sent user");
 
     return userResult;
   } catch (e: any) {
     console.log(e.message ?? e.toString(), ":::error_onboarding");
     window.alert(e.message ?? e.toString());
+  }
+};
+
+export const requestEmailVerification = async (email: string) => {
+  try {
+    // Authenticate admin to send confirm email to user
+    await pb.admins.authWithPassword(
+      import.meta.env.PUBLIC_PB_ADMIN_EMAIL,
+      import.meta.env.PUBLIC_PB_ADMIN_PASSWORD
+    );
+
+    return await pb.collection("users").requestVerification(email);
+  } catch (e: any) {
+    console.log(e.message ?? e.toString());
+    if (window) window.alert(e.message ?? e.toString());
+  }
+};
+
+export const confirmEmailVerification = async (token: string) => {
+  try {
+    // Authenticate admin to send confirm email to user
+    await pb.admins.authWithPassword(
+      import.meta.env.PUBLIC_PB_ADMIN_EMAIL,
+      import.meta.env.PUBLIC_PB_ADMIN_PASSWORD
+    );
+
+    return await pb.collection("users").confirmVerification(token);
+  } catch (e: any) {
+    console.log(e.message ?? e.toString());
+    if (window) window.alert(e.message ?? e.toString());
   }
 };
 

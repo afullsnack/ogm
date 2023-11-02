@@ -1,0 +1,26 @@
+---
+import { confirmEmailVerification } from "../../../../services/UserService";
+import "../../../../utils/global.css";
+
+const { action, token } = Astro.params;
+// use params to verify users email
+console.log(action, token, "::: action and token of auth pages");
+
+if (action === "confirm-verification" && token) {
+  const isConfirmed = await confirmEmailVerification(token);
+  console.log(isConfirmed, ":::Confirmation status");
+
+  if (isConfirmed) return Astro.redirect("/user");
+}
+---
+
+<div class="text-center w-screen h-screen text-base bg-slate-800 text-gray-400">
+  <div class="pt-40">
+    <!-- Return conditional message based of action -->
+    {
+      action === "confirm-verification" && (
+        <span>Confirming your email and redirecting...</span>
+      )
+    }
+  </div>
+</div>
