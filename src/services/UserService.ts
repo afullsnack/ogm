@@ -121,7 +121,7 @@ export const logout = () => {
   window.location.href = `${window.location.origin}/user`;
 };
 
-export const isLoggedIn = () => {
+export const isLoggedIn = (): boolean => {
   // return !!window.localStorage.getItem("pocketbase_auth");
   return pb.authStore.isValid;
 };

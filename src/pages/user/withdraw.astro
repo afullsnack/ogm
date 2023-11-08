@@ -1,22 +1,29 @@
 ---
-import Sectionhead from "@components/sectionhead.astro";
 import DashboardLayout from "@layouts/DashboardLayout.astro";
 const account = Astro.url.searchParams.get("account")! || "demo";
 console.log(account, "::: Account type");
 ---
 
 <DashboardLayout>
-  <Sectionhead>
-    <h1 slot="title" class="text-lg font-semibold text-white">Withdraw</h1>
-    {
-      account === "demo" && (
-        <span slot="desc" class="text-sm font-normal text-white">
-          Cannot withdraw from a <b class="text-orange-600">Demo Account</b>,
-          please make a deposit to acitvate withdrawal
-        </span>
-      )
-    }
-  </Sectionhead>
-  <div class="bg-gradient-to-r from-orange-400 w-full lg:max-w-md rounded">
+  <div class="w-full grid items-start justify-stretch px-4 pt-5">
+    <div
+      class="bg-gradient-to-r p-3 w-full text-white from-orange-500 rounded grid items-center justify-start">
+      <span class="text-xs">BALANCE</span>
+      <span class="text-lg font-bold">$0.0</span>
+    </div>
+    <div
+      class="bg-gray-700 p-3 w-full text-white rounded grid items-center justify-start m-0">
+      <label class="grid justify-start gap-2">
+        <span>Withdrawal mode:</span>
+        <select
+          class="bg-slate-700 border border-gray-400 rounded p-2"
+          name="withdraw_mode"
+          id="withdraw_mode">
+          <option value="crypto">Cryptocurrency</option>
+          <option value="paypal">Paypal</option>
+          <option value="bank">Bank Transfer</option>
+        </select>
+      </label>
+    </div>
   </div>
 </DashboardLayout>
